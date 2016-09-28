@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0eaa19ed2488f4a21abcc60f8c57c79e
+timeCreated: 1475016286
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - FCaslon 12 ITC
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 054bb7c77bc5b4f2ba61248b8c130653, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

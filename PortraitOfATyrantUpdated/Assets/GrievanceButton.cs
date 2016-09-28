@@ -2,28 +2,40 @@
 using UnityEngine.UI;
 using System.Collections;
 
+
+
 public class GrievanceButton : Button {
 
-	InventoryObject item;
-
+	public InventoryObject item;
+	public Text findText;
 	[SerializeField]
 	Text childText;
+	[SerializeField]
+
 
 	System.Action<InventoryObject> onSelect;
 
 	protected override void Awake(){
 		base.Awake();
 		childText = GetComponentInChildren<Text>();
+		findText=GetComponentInParent<Text>();
+//		replaceText=GetComponentInParent<ReplaceThisText>();
+//		iconTemp=GetComponentInChildren<Image>();
 	}
 
 	public void Init(InventoryObject item, System.Action<InventoryObject> onSelect){
 		this.item = item;
 		this.childText.text = 
-			"<size=20>" + 
-			item.name +
-			"</size>\n" + 
-			item.description;
+			"" + 
+			item.name;
+		
+		//	item.description;
+//		replaceText.flavorText=item.description;
+		Debug.Log(this.item.description);
+
+		gameObject.GetComponentInChildren<Image>().sprite=item.inventorySprite;
 		this.onSelect = onSelect;
+
 	}
 
 	public override void OnSelect (UnityEngine.EventSystems.BaseEventData eventData)
@@ -31,6 +43,7 @@ public class GrievanceButton : Button {
 		base.OnSelect (eventData);
 		if (this.onSelect != null){
 			this.onSelect(this.item);
+
 		}
 	}
 

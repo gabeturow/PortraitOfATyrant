@@ -4,9 +4,11 @@ using System.Collections;
 [System.Serializable]
 public class DialogueChoice{
 	public string responseText;
+	public Sprite grievanceImage;
 	public DialogueNode nodeChoice;
 
 }
+
 
 public class DialogueChoiceNode : DialogueNode {
 
