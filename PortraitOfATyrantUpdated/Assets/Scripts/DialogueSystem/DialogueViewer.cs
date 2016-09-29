@@ -6,7 +6,7 @@ public class DialogueViewer : MonoBehaviour {
 	public static DialogueViewer main;
 	public GameObject dialogueGameObject;
 	public ChoicePanel choicePanel{get; private set;}
-	public static GameObject choicePromptDialogue;
+	public GameObject choicePromptDialogue;
 	public GameObject choicePromptGrievance;
 
 
@@ -16,9 +16,10 @@ public class DialogueViewer : MonoBehaviour {
 	public Text riddlePromptNew;
 	public Image characterPortrait;
 	public AudioSource audioSource;
-	ManualLocalScaleSpring scaleSpring;
-	ManualFloatDamper alphaDamper;
-	CanvasGroup canvasGroup;
+	//ManualLocalScaleSpring scaleSpring;
+	//ManualFloatDamper alphaDamper;
+	CanvasGroupFader fader;
+	CanvasGroupFader faderNew;
 
 	const float advancerBuffer = .5f;
 	float advancerBufferTimer = 0f;
@@ -28,20 +29,21 @@ public class DialogueViewer : MonoBehaviour {
 
 	void Awake(){
 		main = this;
-		canvasGroup = GetComponent<CanvasGroup>();
-		scaleSpring = GetComponent<ManualLocalScaleSpring>();
-		alphaDamper = new ManualFloatDamper(0f,.10f);
+		//canvasGroup = GetComponent<CanvasGroup>();
+	//	scaleSpring = GetComponent<ManualLocalScaleSpring>();
+	//	alphaDamper = new ManualFloatDamper(0f,.10f);
 		choicePanel = GetComponentInChildren<ChoicePanel>();
+		fader = gameObject.GetComponentInChildren<CanvasGroupFader>();
+		faderNew=gameObject.ForceGetComponent<CanvasGroupFader>();
 	}
-
 
 	public void PlayDialogue(DialogueTree dialogue){
 		var d = ((GameObject)Instantiate(dialogue.gameObject)).GetComponent<DialogueTree>();
 		d.Init();
 		this.currentDialogue = d;
 		TryAdvance();
-		this.scaleSpring.velocity += new Vector3(2f, 4f, 2f);
-		this.alphaDamper.Target = 1f;
+		//this.scaleSpring.velocity += new Vector3(2f, 4f, 2f);
+		faderNew.displaying = true;
 
 	}
 
@@ -60,9 +62,10 @@ public class DialogueViewer : MonoBehaviour {
 			}
 		}
 
-		scaleSpring.UpdateMe();
-		alphaDamper.Update();
-		canvasGroup.alpha = alphaDamper.Value;
+		//scaleSpring.UpdateMe();
+		//alphaDamper.Update();
+
+		//canvasGroup.alpha = alphaDamper.Value;
 				
 		if(choicePanel.isActive){
 			if(GameMan.main.conditionals.GetValue("RIDDLE")){
@@ -81,11 +84,13 @@ public class DialogueViewer : MonoBehaviour {
 	}
 
 	void TryAdvance(){
+		fader.displaying =false;
 		choicePanel.isActive = false;
 		if (currentDialogue.IsComplete){
-			alphaDamper.Target = 0f;
-			alphaDamper.Speed = .1f;
-			scaleSpring.velocity += Vector3.one * -2f;
+			//alphaDamper.Target = 0f;
+			//alphaDamper.Speed = .1f;
+			//scaleSpring.velocity += Vector3.one * -2f;
+		
 			audioSource.Stop();
 			Destroy(currentDialogue.gameObject);
 			currentDialogue = null;
@@ -94,7 +99,7 @@ public class DialogueViewer : MonoBehaviour {
 			var currentChar = CurrentCharacter;
 			currentDialogue.AdvanceDialogue();
 			if (currentChar != CurrentCharacter){
-				scaleSpring.velocity += new Vector3(0f, -5f, 0f);
+				//scaleSpring.velocity += new Vector3(0f, -5f, 0f);
 			}
 			audioSource.Stop();
 			DrawCurrentMessage();
@@ -104,9 +109,11 @@ public class DialogueViewer : MonoBehaviour {
 
 	void DrawCurrentMessage(){
 		if (currentDialogue.IsBlocked){
+			//
 			return;
 		}
 		else{
+			
 			choicePanel.isActive = false;
 			audioSource.clip = currentDialogue.CurrentMessage.audioClip;
 			if (CurrentCharacter == null){

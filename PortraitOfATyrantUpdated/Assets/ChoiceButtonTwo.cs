@@ -44,7 +44,7 @@ public class ChoiceButtonTwo : MonoBehaviour, ISelectHandler {
 
 
 	public void OnSelect(BaseEventData data){
-		Invoke("WaitToSubmit",.5f);
+		Invoke("WaitToSubmit",.25f);
 
 	}
 	void WaitToSubmit(){

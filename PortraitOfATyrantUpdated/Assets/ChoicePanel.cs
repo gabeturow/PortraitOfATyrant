@@ -8,7 +8,8 @@ public class ChoicePanel : MonoBehaviour {
 
 	ChoiceButton template;
 	ChoiceButtonTwo templateTwo;
-
+	CanvasGroup canvasGroup;
+	CanvasGroupFader fader;
 	ChoiceButton[] buttons = new ChoiceButton[0];
 	ChoiceButtonTwo[] buttonsTwo = new ChoiceButtonTwo[0];
 
@@ -28,15 +29,15 @@ public class ChoicePanel : MonoBehaviour {
 		templateTwo.gameObject.SetActive(false);
 		scaleSpring = this.gameObject.ForceGetComponent<ManualLocalScaleSpring>();
 		scaleSpring.dampingRatio = 1.2f;
-
+		fader = gameObject.ForceGetComponent<CanvasGroupFader>();
 	}
 void Update(){
 		//riddleText.text=DialogueViewer.currentDialogue.CurrentMessage.text;
 		//THIS CHANGES THE TEXT FOR THE SELECTION INTERFACE PROMPTS
 	
 
-		scaleSpring.target = isActive ? Vector3.one : new Vector3(1f, 0f, 1f);
-		scaleSpring.UpdateMe();
+	//	scaleSpring.target = isActive ? Vector3.one : new Vector3(1f, 0f, 1f);
+	//	scaleSpring.UpdateMe();
 	}
 
 	public void ClearChoices(){
@@ -58,7 +59,7 @@ void Update(){
 
 	public void SetChoices(DialogueChoice[] choices, System.Action<int> onSubmit){
 		ClearChoices();
-
+		fader.displaying = true;
 		if(GameMan.main.conditionals.GetValue("GRIEVANCE")){
 		buttonsTwo = new ChoiceButtonTwo[choices.Length];
 			for(int i = 0; i < choices.Length; i++){

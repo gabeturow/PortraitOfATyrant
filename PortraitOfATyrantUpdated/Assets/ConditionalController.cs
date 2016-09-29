@@ -77,7 +77,7 @@ public class ConditionalController : MonoBehaviour {
 	
 		//THIS CONTROLS THE THEME MUSIC
 		
-		if(!GameMan.main.conditionals.GetValue("UPPERDECK")){
+		if(GameMan.main.conditionals.GetValue("UPPERDECK")==false){
 			ThemeMusicBelowDeck.enabled=true;
 			ThemeMusicAboveDeck.enabled=false;
 		}else{
