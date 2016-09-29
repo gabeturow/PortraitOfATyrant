@@ -3,6 +3,7 @@ using System.Collections;
 
 [System.Serializable]
 public class DialogueChoice{
+	public string label;
 	public string responseText;
 	public Sprite grievanceImage;
 	public DialogueNode nodeChoice;
@@ -13,9 +14,8 @@ public class DialogueChoice{
 public class DialogueChoiceNode : DialogueNode {
 
 	public DialogueChoice[] choices;
-	public bool grievanceDialogue;
-	public bool rightsDialogue;
-	public bool riddleDialogue;
+	public string conditionalState;
+	public bool conditionalBool=false;
 
 
 	protected override void DrawConnectors ()
@@ -29,31 +29,19 @@ public class DialogueChoiceNode : DialogueNode {
 
 
 	public override void DoBlock(){
+
+		GameMan.main.conditionals.SetValue(conditionalState, conditionalBool);
 		DialogueViewer.main.choicePanel.isActive = true;
-
-		if(grievanceDialogue){
-			DialogueViewer.main.choicePanel.grievanceActive=true;
-			DialogueViewer.main.choicePanel.rightsActive=false;
-			DialogueViewer.main.choicePanel.riddleActive=false;
-		}
-		if(rightsDialogue){
-			DialogueViewer.main.choicePanel.grievanceActive=false;
-			DialogueViewer.main.choicePanel.rightsActive=true;
-			DialogueViewer.main.choicePanel.riddleActive=false;
-		}
-		if(riddleDialogue){
-			DialogueViewer.main.choicePanel.grievanceActive=false;
-			DialogueViewer.main.choicePanel.rightsActive=false;
-			DialogueViewer.main.choicePanel.riddleActive=true;
-		}
-
 		DialogueViewer.main.choicePanel.SetChoices(choices,
 			(i)=>{
 				this.nextNode = choices[i].nodeChoice;
 				DialogueViewer.main.choicePanel.isActive = false;
 				this.UnBlock();
 			});
+
+
 	}
+
 
 
 }

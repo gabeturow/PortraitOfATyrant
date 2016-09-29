@@ -13,13 +13,7 @@ public class SwitchChoicePanel : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if(choicePanel.grievanceActive){
-			dialoguePanel.SetActive(false);
-			grievancePanel.SetActive(true);
-		} else{
-			dialoguePanel.SetActive(true);
-			grievancePanel.SetActive(false);
-		}
+		
 			
 	}
 }

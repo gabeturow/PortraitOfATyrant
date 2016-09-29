@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
+using System.Collections;
+
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class ChoiceButton : MonoBehaviour, ISelectHandler {
+public class ChoiceButtonTwo : MonoBehaviour, ISelectHandler {
 
 	public DialogueChoice choice{get; private set;}
 	System.Action onSubmit;
 
 	public Text t;
-	public Image img1;
+	public Text tLabel;
+	public Image img1Two;
 
 	void Awake(){
-//		choicePanel= GetComponentInChildren<ChoicePanel>();
+		//		choicePanel= GetComponentInChildren<ChoicePanel>();
 	}
 
 	public void Init(DialogueChoice dialogueChoice, System.Action onSubmit){
 		this.choice = dialogueChoice;
-/*		if(choicePanel.grievanceActive){
+		/*		if(choicePanel.grievanceActive){
 			dialoguePanel.SetActive(false);
 			grievancePanel.SetActive(true);
 		}
@@ -27,19 +30,27 @@ public class ChoiceButton : MonoBehaviour, ISelectHandler {
 		}
 		*/
 		Debug.Log(choice.responseText);
-		Debug.Log(t.text);
-		if(choice.grievanceImage!=null && img1!=null){
-		img1.sprite=choice.grievanceImage;
+//		Debug.Log(tTwo.text);
+		if(choice.grievanceImage!=null && img1Two!=null){
+			img1Two.sprite=choice.grievanceImage;
 		}
-
+	
+		if(choice.label!=null){
+		tLabel.text = choice.label;
+		}
 		t.text = choice.responseText;
 		this.onSubmit = onSubmit;
 	}
 
+
 	public void OnSelect(BaseEventData data){
-		if (onSubmit != null){
-			onSubmit();
-		}
+		Invoke("WaitToSubmit",.5f);
+
+	}
+	void WaitToSubmit(){
+	if (onSubmit != null){
+		onSubmit();
+	}
 	}
 
 	void Update(){

@@ -7,46 +7,32 @@ using System.Collections.Generic;
 public class ChoicePanel : MonoBehaviour {
 
 	ChoiceButton template;
+	ChoiceButtonTwo templateTwo;
 
 	ChoiceButton[] buttons = new ChoiceButton[0];
+	ChoiceButtonTwo[] buttonsTwo = new ChoiceButtonTwo[0];
 
 	ManualLocalScaleSpring scaleSpring;
 
 	public bool isActive = false;
-	public bool grievanceActive=false;
-	public bool rightsActive=false;
-	public bool riddleActive=false;
+
 	public Text riddleText;
-	public GameObject grievancetextobject;
-	public GameObject riddletextobject;
-	public GameObject rightstextobject;
+
+	//public string promptText;
 
 
 	void Awake(){
 		template = GetComponentInChildren<ChoiceButton>();
+		templateTwo = GetComponentInChildren<ChoiceButtonTwo>();
 		template.gameObject.SetActive(false);
+		templateTwo.gameObject.SetActive(false);
 		scaleSpring = this.gameObject.ForceGetComponent<ManualLocalScaleSpring>();
-		scaleSpring.dampingRatio = .5f;
+		scaleSpring.dampingRatio = 1.2f;
 
 	}
 void Update(){
 		//riddleText.text=DialogueViewer.currentDialogue.CurrentMessage.text;
 		//THIS CHANGES THE TEXT FOR THE SELECTION INTERFACE PROMPTS
-		if(grievanceActive){
-			grievancetextobject.SetActive(true);
-			riddletextobject.SetActive(false);
-			rightstextobject.SetActive(false);
-		}
-		if(rightsActive){
-			grievancetextobject.SetActive(false);
-			riddletextobject.SetActive(false);
-			rightstextobject.SetActive(true);
-		}
-		if(riddleActive){
-			grievancetextobject.SetActive(false);
-			riddletextobject.SetActive(true);
-			rightstextobject.SetActive(false);
-		}
 	
 
 		scaleSpring.target = isActive ? Vector3.one : new Vector3(1f, 0f, 1f);
@@ -54,25 +40,48 @@ void Update(){
 	}
 
 	public void ClearChoices(){
-		for (int i = 0; i < buttons.Length; i++){
-			Destroy(buttons[i].gameObject);
+		
+
+		if(GameMan.main.conditionals.GetValue("GRIEVANCE")){
+			for (int i = 0; i < buttonsTwo.Length; i++){
+				Destroy(buttonsTwo[i].gameObject);
+			}
+			buttonsTwo = new ChoiceButtonTwo[0];
+		}else{
+			for (int i = 0; i < buttons.Length; i++){
+				Destroy(buttons[i].gameObject);
+			}
+			buttons = new ChoiceButton[0];
 		}
-		buttons = new ChoiceButton[0];
+
 	}
 
 	public void SetChoices(DialogueChoice[] choices, System.Action<int> onSubmit){
-
 		ClearChoices();
 
-		buttons = new ChoiceButton[choices.Length];
-		for(int i = 0; i < choices.Length; i++){
-			buttons[i] = ((GameObject)Instantiate(template.gameObject)).GetComponent<ChoiceButton>();
-			buttons[i].gameObject.transform.parent = template.transform.parent;
-			var index = i;
-			buttons[i].Init(choices[i], ()=>{onSubmit(index);});
-			buttons[i].gameObject.SetActive(true);
-		}
+		if(GameMan.main.conditionals.GetValue("GRIEVANCE")){
+		buttonsTwo = new ChoiceButtonTwo[choices.Length];
+			for(int i = 0; i < choices.Length; i++){
+				buttonsTwo[i] = ((GameObject)Instantiate(templateTwo.gameObject)).GetComponent<ChoiceButtonTwo>();
+				buttonsTwo[i].gameObject.transform.parent = templateTwo.transform.parent;
+				var index = i;
 
+				buttonsTwo[i].Init(choices[i], ()=>{onSubmit(index);});
+				buttonsTwo[i].gameObject.SetActive(true);
+			}
+
+		}else{
+
+			buttons = new ChoiceButton[choices.Length];
+			for(int i = 0; i < choices.Length; i++){
+				buttons[i] = ((GameObject)Instantiate(template.gameObject)).GetComponent<ChoiceButton>();
+				buttons[i].gameObject.transform.parent = template.transform.parent;
+				var index = i;
+
+				buttons[i].Init(choices[i], ()=>{onSubmit(index);});
+				buttons[i].gameObject.SetActive(true);
+			}
+		}
 	}
 
 }

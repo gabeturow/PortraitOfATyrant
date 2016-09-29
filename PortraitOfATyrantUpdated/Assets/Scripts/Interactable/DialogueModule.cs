@@ -9,7 +9,7 @@ public class DialogueModule : InteractionModule {
 
 	public override void OnInteract ()
 	{
-		DialogueViewer.main.PlayDialogue(dialogue);
+		DialogueViewer.main.PlayDialogue(dialogue);;
 	}
 
 }

@@ -6,11 +6,14 @@ public class DialogueViewer : MonoBehaviour {
 	public static DialogueViewer main;
 	public GameObject dialogueGameObject;
 	public ChoicePanel choicePanel{get; private set;}
-	public GameObject choicePrompt;
+	public static GameObject choicePromptDialogue;
+	public GameObject choicePromptGrievance;
+
 
 	public DialogueTree currentDialogue{get; private set;}
 	public Text characterName;
 	public Text dialogueText;
+	public Text riddlePromptNew;
 	public Image characterPortrait;
 	public AudioSource audioSource;
 	ManualLocalScaleSpring scaleSpring;
@@ -37,8 +40,9 @@ public class DialogueViewer : MonoBehaviour {
 		d.Init();
 		this.currentDialogue = d;
 		TryAdvance();
-		this.scaleSpring.velocity += new Vector3(2f, 2f, 2f);
+		this.scaleSpring.velocity += new Vector3(2f, 4f, 2f);
 		this.alphaDamper.Target = 1f;
+
 	}
 
 
@@ -59,18 +63,20 @@ public class DialogueViewer : MonoBehaviour {
 		scaleSpring.UpdateMe();
 		alphaDamper.Update();
 		canvasGroup.alpha = alphaDamper.Value;
-
+				
 		if(choicePanel.isActive){
-			
-			if(choicePanel.riddleActive){
-				choicePanel.riddleText.text=dialogueText.text;
+			if(GameMan.main.conditionals.GetValue("RIDDLE")){
+				riddlePromptNew.text=dialogueText.text;
 			}else{
-				choicePrompt.GetComponent<Image>().enabled=false;
+				riddlePromptNew.text="";
+				choicePromptDialogue.GetComponent<Image>().enabled=false;
 			}
+
 			dialogueGameObject.SetActive(false);
+		
 		}else{
 			dialogueGameObject.SetActive(true);
-			choicePrompt.GetComponent<Image>().enabled=true;
+			choicePromptDialogue.GetComponent<Image>().enabled=true;
 		}
 	}
 
@@ -79,7 +85,7 @@ public class DialogueViewer : MonoBehaviour {
 		if (currentDialogue.IsComplete){
 			alphaDamper.Target = 0f;
 			alphaDamper.Speed = .1f;
-			scaleSpring.velocity += Vector3.one * -1f;
+			scaleSpring.velocity += Vector3.one * -2f;
 			audioSource.Stop();
 			Destroy(currentDialogue.gameObject);
 			currentDialogue = null;
@@ -88,7 +94,7 @@ public class DialogueViewer : MonoBehaviour {
 			var currentChar = CurrentCharacter;
 			currentDialogue.AdvanceDialogue();
 			if (currentChar != CurrentCharacter){
-				scaleSpring.velocity += new Vector3(0f, -18f, 0f);
+				scaleSpring.velocity += new Vector3(0f, -5f, 0f);
 			}
 			audioSource.Stop();
 			DrawCurrentMessage();
