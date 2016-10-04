@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class CharacterAnimation : MonoBehaviour {
+	public static CharacterAnimation main;
 	public GameObject Front, Side, Back;
 	public Animator currentAnimator;
 
@@ -11,13 +12,20 @@ public class CharacterAnimation : MonoBehaviour {
 
 	public enum PlayingAnim{
 		Idle, Walk, Talk, Laugh, PickUp_Hi, PickUp_Med, PickUp_Lo, Inventory, InventoryUse,
-		ClimbUp, PlayCards, TightRope, Captain, LightLamp, TurnLeft}
+		ClimbUp, PlayCards, TightRope, Captain, LightLamp, TurnLeft, TurnAway}
 	public PlayingAnim action;
 
 	public bool stairUp, stairDown;
 
 	void Start () {
 
+	}
+	public void TurnCharacterLeft(bool doIt){
+		if(doIt){
+			facing=Face.Left;
+		}else{
+			facing=Face.Right;
+		}
 	}
 
 	void Update () {
@@ -58,9 +66,10 @@ public class CharacterAnimation : MonoBehaviour {
 
 		case Face.Back:
 			Front.SetActive(false);
-		//	Side.SetActive(false);
+			Side.SetActive(false);
 			Back.SetActive(true);
-		//	Side.transform.localScale = new Vector3(0, 0, 0);
+			//Side.transform.localScale = new Vector3(1, 1, 1);
+			//Side.transform.localScale = new Vector3(0, 0, 0);
 			currentAnimator = Back.GetComponent<Animator>();
 			break;
 		}
@@ -82,6 +91,26 @@ public class CharacterAnimation : MonoBehaviour {
 	Side.transform.localScale = new Vector3(1, 1, 1);
 	
 	}
+
+	IEnumerator TurnBack(){
+		
+		currentAnimator.SetBool("Idle", true);
+		yield return new WaitForSeconds(.1f);
+		//Side.transform.localScale = new Vector3(0, 0, 0);
+		facing=Face.Back;
+
+		currentAnimator.SetBool("TurnAway", true);
+		yield return new WaitForSeconds(4.5f);
+		facing=Face.Left;
+		action = PlayingAnim.Walk;
+		currentAnimator.SetBool("TurnAway", false);
+
+		Back.transform.localScale = new Vector3(0, 0, 0);
+
+		Side.transform.localScale = new Vector3(1, 1, 1);
+
+	}
+
 
 	void PlayAnim(PlayingAnim anim){
 		switch (anim){
@@ -206,6 +235,23 @@ public class CharacterAnimation : MonoBehaviour {
 				currentAnimator.SetBool("ClimbUp", true);
 				currentAnimator.SetBool("PlayCards", true);
 			}
+			break;
+		case PlayingAnim.TurnAway:
+			if(facing == Face.Left || facing == Face.Right ){
+
+				Back.transform.localScale = new Vector3(1, 1, 1);
+				currentAnimator.SetBool("Talking", false);
+				currentAnimator.SetBool("Walking", false);
+				currentAnimator.SetBool("Laughing", false);
+				currentAnimator.SetInteger("PickUp", 0);
+				currentAnimator.SetBool("TightRope", false);
+				currentAnimator.SetBool("TurnLeft", false);
+				currentAnimator.SetBool("Idle",true);
+				//facing=Face.Back;
+
+				StartCoroutine(TurnBack());
+			}
+			break;
 			
 
 			break;

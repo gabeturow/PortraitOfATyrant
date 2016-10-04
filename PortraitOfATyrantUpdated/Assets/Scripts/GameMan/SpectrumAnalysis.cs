@@ -3,7 +3,7 @@
 	using UnityEngine.UI;
 
 		public class SpectrumAnalysis : MonoBehaviour {
-
+	public static SpectrumAnalysis main;
 		public int qSamples = 1024;  // array size
 		public float refValue = 0.1f; // RMS value for 0 dB
 		public float threshold = 0.02f;  // minimum amplitude to extract pitch

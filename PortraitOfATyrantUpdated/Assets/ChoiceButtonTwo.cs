@@ -3,7 +3,6 @@ using System.Collections;
 
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Collections;
 
 public class ChoiceButtonTwo : MonoBehaviour, ISelectHandler {
 

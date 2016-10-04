@@ -3,10 +3,13 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class ConditionalController : MonoBehaviour {
+	public static ConditionalController main;
 	public GameObject BreadRoomSounds;
-	public AudioSource ThemeMusicBelowDeck;
-	public AudioSource ThemeMusicAboveDeck;
-	public GameObject WhalerSinging;
+	//public AudioSource backgroundMusic;
+	public AudioSource belowDeckTheme;
+	public AudioSource upperDeckTheme;
+	public AudioSource conflictTheme;
+	public AudioSource WhalerSinging;
 	public GameObject dialoguePanel;
 	public GameObject grievancePanel;
 	public GameObject prompt;
@@ -18,15 +21,16 @@ public class ConditionalController : MonoBehaviour {
 		GameMan.main.conditionals.SetValue("BREADROOMSOUNDS", false);
 		GameMan.main.conditionals.SetValue("DOORLEFTUSED", false);
 		GameMan.main.conditionals.SetValue("UPPERDECK", false);
+		GameMan.main.conditionals.SetValue("BELOWDECK", true);
 		GameMan.main.conditionals.SetValue("COOKFINISHED", false);
 		GameMan.main.conditionals.SetValue("WHALERSINGING", true);
 		GameMan.main.conditionals.SetValue("LAMPON", false);
 		GameMan.main.conditionals.SetValue("FAN_GIVEN", false);
 		GameMan.main.conditionals.SetValue("CHESTOPEN", false);
 		GameMan.main.conditionals.SetValue("DRAWEROPEN", false);
-		GameMan.main.conditionals.SetValue("DUDINGSTONPOINTS", false);
-		GameMan.main.conditionals.SetValue("SHIPBURNING", false);
-		GameMan.main.conditionals.SetValue("GRIEVANCE", false);
+		GameMan.main.conditionals.SetValue("DUDINGSTONPOINTS", true);
+		GameMan.main.conditionals.SetValue("SHIPBURNING", true);
+		GameMan.main.conditionals.SetValue("GRIEVANCE", true);
 		GameMan.main.conditionals.SetValue("RIDDLE", false);
 		GameMan.main.conditionals.SetValue("DIALOGUE", false);
 
@@ -76,20 +80,30 @@ public class ConditionalController : MonoBehaviour {
 
 	
 		//THIS CONTROLS THE THEME MUSIC
+
+		if(GameMan.main.conditionals.GetValue("BELOWDECK")){// && !GameMan.main.conditionals.GetValue("GRIEVANCE")){
+			belowDeckTheme.enabled=true;
+	
+			upperDeckTheme.enabled=false;
+		}else if (GameMan.main.conditionals.GetValue("UPPERDECK")){
+			upperDeckTheme.enabled=true;
 		
-		if(GameMan.main.conditionals.GetValue("UPPERDECK")==false){
-			ThemeMusicBelowDeck.enabled=true;
-			ThemeMusicAboveDeck.enabled=false;
+			belowDeckTheme.enabled=false;
+		}
+		if (GameMan.main.conditionals.GetValue("GRIEVANCE")){
+
+			belowDeckTheme.enabled=false;
+			conflictTheme.enabled=true;
+			upperDeckTheme.enabled=false;
 		}else{
-			ThemeMusicAboveDeck.enabled=true;
-			ThemeMusicBelowDeck.enabled=false;
+			conflictTheme.enabled=false;
 		}
 
 		//CONTROLS WHALER SINGING
 		if(GameMan.main.conditionals.GetValue("WHALERSINGING")){
-			WhalerSinging.SetActive(true);
+			WhalerSinging.enabled=true;
 		}else{
-			WhalerSinging.SetActive(false);
+			WhalerSinging.enabled=false;
 		}
 	}
 }

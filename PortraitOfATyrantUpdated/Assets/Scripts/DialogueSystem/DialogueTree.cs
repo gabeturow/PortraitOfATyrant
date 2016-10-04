@@ -10,6 +10,13 @@ public class DialogueTree : MonoBehaviour {
 	public DialogueNode root;
 	public DialogueCharacter defaultCharacter;
 	public DialogueNode current{get; private set;}
+	public bool zoomIn=false;
+	public bool RightSideConvo=false;
+	CharacterAnimation characterNew;
+
+	void Awake(){
+		characterNew = DialogueViewer.main.characterOne.GetComponent<CharacterAnimation>();
+	}
 
 	public void Init(){
 		current = root;
@@ -27,6 +34,10 @@ public class DialogueTree : MonoBehaviour {
 	public bool IsBlocked = false;
 
 	public void AdvanceDialogue(){
+		DialogueViewer.main.ZoomCamera=zoomIn;
+		DialogueViewer.main.moveright=RightSideConvo;
+		characterNew.TurnCharacterLeft(!RightSideConvo);
+			
 		if (current.IsComplete){
 			current = current.nextNode;
 			current.Init();

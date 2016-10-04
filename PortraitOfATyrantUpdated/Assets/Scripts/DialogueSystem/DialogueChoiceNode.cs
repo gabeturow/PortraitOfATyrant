@@ -18,7 +18,7 @@ public class DialogueChoiceNode : DialogueNode {
 	public bool conditionalBool=false;
 
 
-	protected override void DrawConnectors ()
+/*	protected override void DrawConnectors ()
 	{
 		for(int i = 0; i < choices.Length; i++){
 			if (choices[i] != null && choices[i].nodeChoice != null){
@@ -27,7 +27,7 @@ public class DialogueChoiceNode : DialogueNode {
 		}
 	}
 
-
+*/
 	public override void DoBlock(){
 
 		GameMan.main.conditionals.SetValue(conditionalState, conditionalBool);

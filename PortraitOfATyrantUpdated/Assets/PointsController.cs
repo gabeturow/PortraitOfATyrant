@@ -46,7 +46,7 @@ public class PointsController : MonoBehaviour {
 			rank="EXPERT";
 		}
 
-		DisplayTextObject.text=""+rank+"   "+points+"/"+denominator;
+		DisplayTextObject.text=""+rank+" "+points+"/"+denominator;
 
 
 
