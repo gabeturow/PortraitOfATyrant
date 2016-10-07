@@ -6,14 +6,19 @@ public class turnOnturnOff : MonoBehaviour {
 	public GameObject objectToTurnOff;
 
 	// Use this for initialization
-	void Start () {
-		if(objectToTurnOff!=null){
-		objectToTurnOff.SetActive(false);
-		}
+	IEnumerator Start () {
+		yield return StartCoroutine(GoGo());
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public IEnumerator GoGo(){
+		yield return new WaitForSeconds(1.5f);
+		if(objectToTurnOff!=null){
+			objectToTurnOff.GetComponent<CanvasGroupFader>().displaying=false;
+		}
 	}
 }

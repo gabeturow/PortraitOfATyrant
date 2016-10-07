@@ -15,6 +15,7 @@ public class RunSlideshow : MonoBehaviour {
 	public bool fadeOut2=true;
 	public GameObject backdrop;
 	public GameObject button;
+	public GameObject slideshowFaderObject;
 	ConditionalController newCondition;
 	public bool fadeOut=true;
 	public bool music=true;
@@ -94,7 +95,7 @@ IEnumerator Start() {
 			fadeOut=false;
 		button.SetActive(false);
 		yield return new WaitForSeconds(1);
-		this.GetComponentInParent<Canvas>().gameObject.SetActive(false);
+		slideshowFaderObject.GetComponent<CanvasGroupFader>().displaying=false;
 		if(levelContent!=null){
 		levelContent.SetActive(true);
 		}

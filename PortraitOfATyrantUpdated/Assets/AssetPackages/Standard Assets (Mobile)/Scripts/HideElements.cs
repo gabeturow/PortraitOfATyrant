@@ -14,8 +14,10 @@ public class HideElements : MonoBehaviour {
 	}
 
 	public void HideAll(){
+		GameMan.main.conditionals.SetValue("CONFLICT", false);
+		GameMan.main.conditionals.SetValue("BELOWDECK", true);
+		this.GetComponent<CanvasGroupFader>().displaying=false;
+		//this.gameObject.SetActive(false);
 
-		this.gameObject.SetActive(false);
-		GameMan.main.conditionals.SetValue("GRIEVANCE", false);
 	}
 }
