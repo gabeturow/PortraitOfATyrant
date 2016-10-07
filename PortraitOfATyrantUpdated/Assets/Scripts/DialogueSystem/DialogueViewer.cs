@@ -9,6 +9,7 @@ public class DialogueViewer : MonoBehaviour {
 	public GameObject choicePromptDialogue;
 	public GameObject choicePromptGrievance;
 	public bool moveright=false;
+	public float howMuchMoveRight = .5f;
 	public GameObject characterOne;
 
 
@@ -52,7 +53,6 @@ public class DialogueViewer : MonoBehaviour {
 		d.Init();
 		this.currentDialogue = d;
 		TryAdvance();
-		//this.scaleSpring.velocity += new Vector3(2f, 4f, 2f);
 		faderNew.displaying = true;
 
 		//Move the camera around when you click to start a dialogue
@@ -70,29 +70,29 @@ public class DialogueViewer : MonoBehaviour {
 
 			if(moveright){
 			if(cameraGo){
-				if(cameraX<.5f){
+				if(cameraX<currentDialogue.howMuchRightMove){
 					cameraX+=.01f;
 				}
 			}else if(cameraX>0f){
-				cameraX-=.01f;
+				cameraX-=.02f;
 			}
 			}else if(cameraGo){
 				if(cameraX>-2f){
 					cameraX-=.01f;
 			}
 			}else if(cameraX<0f){
-					cameraX+=.01f;
+					cameraX+=.02f;
 			}
 
 
 
 			if(cameraGo){
-				if(cameraZoom>3f){
+				if(cameraZoom>currentDialogue.howMuchZoom){
 					cameraZoom-=.01f;
 				}
 			}else{
 				if(cameraZoom<5f){
-					cameraZoom+=.01f;
+					cameraZoom+=.02f;
 				}
 			}
 		}
@@ -138,7 +138,6 @@ public class DialogueViewer : MonoBehaviour {
 			//alphaDamper.Target = 0f;
 			//alphaDamper.Speed = .1f;
 			//scaleSpring.velocity += Vector3.one * -2f;
-		
 			audioSource.Stop();
 			Destroy(currentDialogue.gameObject);
 			currentDialogue = null;
@@ -166,6 +165,7 @@ public class DialogueViewer : MonoBehaviour {
 		}
 		else{
 			//faderNew.displaying =false;
+			//choicePanel.isActive = false;
 			choicePanel.isActive = false;
 			audioSource.clip = currentDialogue.CurrentMessage.audioClip;
 			if (CurrentCharacter == null){

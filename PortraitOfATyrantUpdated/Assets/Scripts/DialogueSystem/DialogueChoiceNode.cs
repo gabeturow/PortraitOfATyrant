@@ -8,14 +8,17 @@ public class DialogueChoice{
 	public Sprite grievanceImage;
 	public DialogueNode nodeChoice;
 
+
 }
 
 
 public class DialogueChoiceNode : DialogueNode {
-
+	public static DialogueChoiceNode main;
 	public DialogueChoice[] choices;
 	public string conditionalState;
 	public bool conditionalBool=false;
+	public Sprite rightsImage;
+	public string rightsLabel;
 
 
 /*	protected override void DrawConnectors ()
@@ -31,6 +34,8 @@ public class DialogueChoiceNode : DialogueNode {
 	public override void DoBlock(){
 
 		GameMan.main.conditionals.SetValue(conditionalState, conditionalBool);
+		rightsImageMenu=rightsImage;
+		rightsLabelMenu=rightsLabel;
 		DialogueViewer.main.choicePanel.isActive = true;
 		DialogueViewer.main.choicePanel.SetChoices(choices,
 			(i)=>{

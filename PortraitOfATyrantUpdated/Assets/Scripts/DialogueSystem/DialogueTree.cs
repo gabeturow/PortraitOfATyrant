@@ -11,6 +11,8 @@ public class DialogueTree : MonoBehaviour {
 	public DialogueCharacter defaultCharacter;
 	public DialogueNode current{get; private set;}
 	public bool zoomIn=false;
+	public float howMuchZoom=3;
+	public float howMuchRightMove = .5f;
 	public bool RightSideConvo=false;
 	CharacterAnimation characterNew;
 
@@ -21,6 +23,10 @@ public class DialogueTree : MonoBehaviour {
 	public void Init(){
 		current = root;
 		current.Init();
+	}
+
+	void Update(){
+
 	}
 
 	public bool IsComplete{

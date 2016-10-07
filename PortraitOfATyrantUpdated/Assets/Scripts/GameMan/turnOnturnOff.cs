@@ -7,7 +7,9 @@ public class turnOnturnOff : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if(objectToTurnOff!=null){
 		objectToTurnOff.SetActive(false);
+		}
 	}
 	
 	// Update is called once per frame

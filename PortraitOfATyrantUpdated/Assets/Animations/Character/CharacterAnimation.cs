@@ -101,13 +101,13 @@ public class CharacterAnimation : MonoBehaviour {
 
 		currentAnimator.SetBool("TurnAway", true);
 		yield return new WaitForSeconds(4.5f);
-		facing=Face.Left;
+	//	facing=Face.Left;
 		action = PlayingAnim.Walk;
 		currentAnimator.SetBool("TurnAway", false);
 
-		Back.transform.localScale = new Vector3(0, 0, 0);
+		//Back.transform.localScale = new Vector3(0, 0, 0);
 
-		Side.transform.localScale = new Vector3(1, 1, 1);
+		//Side.transform.localScale = new Vector3(1, 1, 1);
 
 	}
 

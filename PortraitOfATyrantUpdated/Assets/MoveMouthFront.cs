@@ -23,7 +23,7 @@ public class MoveMouthFront : MonoBehaviour {
 
 
 		if(DialogueViewer.main.characterName.text==currentName){
-			voiceAmplitude=-spectrumAnalysis.rmsValue*1;
+			voiceAmplitude=-spectrumAnalysis.rmsValue*1.5f;
 			if(voiceAmplitude<-60){
 				voiceAmplitude/=(5/2);
 			}else if(voiceAmplitude<-30){

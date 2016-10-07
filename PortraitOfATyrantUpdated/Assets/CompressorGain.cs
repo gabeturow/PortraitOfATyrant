@@ -21,6 +21,6 @@ public class CompressorGain : MonoBehaviour {
 		}else{
 			gameObject.GetComponent<AudioSource>().volume=.5f;
 		}*/
-		Debug.Log(gameObject.GetComponent<AudioSource>().volume);
+//		Debug.Log(gameObject.GetComponent<AudioSource>().volume);
 	}
 }

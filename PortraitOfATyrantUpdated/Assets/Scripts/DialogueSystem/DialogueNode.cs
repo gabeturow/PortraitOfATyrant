@@ -19,6 +19,9 @@ public class DialogueNode : MonoBehaviour {
 	public DialogueCharacter character;
 	public DialogueNode nextNode;
 
+	public static Sprite rightsImageMenu;
+	public static string rightsLabelMenu;
+
 	public DialogueLine[] lines;
 
 	public int currentMessageIndex{get; private set;}
@@ -31,10 +34,12 @@ public class DialogueNode : MonoBehaviour {
 
 	public virtual void Init(){
 		this.currentMessageIndex = -1;
+		//GameMan.main.conditionals.SetValue(condition, valueToSet);
 	}
 
 
 	public virtual DialogueLine CurrentMessage{ 
+		
 		get{ return lines[currentMessageIndex]; } 
 	}
 

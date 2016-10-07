@@ -5,13 +5,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ChoicePanel : MonoBehaviour {
-
+	public static ChoicePanel main;
 	ChoiceButton template;
 	ChoiceButtonTwo templateTwo;
+	ChoiceButtonThree templateThree;
 	CanvasGroup canvasGroup;
 	CanvasGroupFader fader;
 	ChoiceButton[] buttons = new ChoiceButton[0];
 	ChoiceButtonTwo[] buttonsTwo = new ChoiceButtonTwo[0];
+	ChoiceButtonThree[] buttonsThree = new ChoiceButtonThree[0];
+	public static Sprite rightsImage;
 
 	ManualLocalScaleSpring scaleSpring;
 
@@ -25,16 +28,17 @@ public class ChoicePanel : MonoBehaviour {
 	void Awake(){
 		template = GetComponentInChildren<ChoiceButton>();
 		templateTwo = GetComponentInChildren<ChoiceButtonTwo>();
+		templateThree = GetComponentInChildren<ChoiceButtonThree>();
 		template.gameObject.SetActive(false);
 		templateTwo.gameObject.SetActive(false);
+		templateThree.gameObject.SetActive(false);
 		scaleSpring = this.gameObject.ForceGetComponent<ManualLocalScaleSpring>();
 		scaleSpring.dampingRatio = 1.2f;
 		fader = gameObject.ForceGetComponent<CanvasGroupFader>();
 	}
+
 void Update(){
-		//riddleText.text=DialogueViewer.currentDialogue.CurrentMessage.text;
-		//THIS CHANGES THE TEXT FOR THE SELECTION INTERFACE PROMPTS
-	
+
 
 	//	scaleSpring.target = isActive ? Vector3.one : new Vector3(1f, 0f, 1f);
 	//	scaleSpring.UpdateMe();
@@ -48,7 +52,15 @@ void Update(){
 				Destroy(buttonsTwo[i].gameObject);
 			}
 			buttonsTwo = new ChoiceButtonTwo[0];
-		}else{
+		}
+
+		if(GameMan.main.conditionals.GetValue("RIGHTS")){
+			for (int i = 0; i < buttonsThree.Length; i++){
+				Destroy(buttonsThree[i].gameObject);
+			}
+			buttonsThree = new ChoiceButtonThree[0];
+		}
+		if(GameMan.main.conditionals.GetValue("DIALOGUE")){
 			for (int i = 0; i < buttons.Length; i++){
 				Destroy(buttons[i].gameObject);
 			}
@@ -71,6 +83,16 @@ void Update(){
 				buttonsTwo[i].gameObject.SetActive(true);
 			}
 
+		}else if(GameMan.main.conditionals.GetValue("RIGHTS")){
+			buttonsThree = new ChoiceButtonThree[choices.Length];
+		for(int i = 0; i < choices.Length; i++){
+			buttonsThree[i] = ((GameObject)Instantiate(templateThree.gameObject)).GetComponent<ChoiceButtonThree>();
+			buttonsThree[i].gameObject.transform.parent = templateThree.transform.parent;
+			var index = i;
+
+			buttonsThree[i].Init(choices[i], ()=>{onSubmit(index);});
+			buttonsThree[i].gameObject.SetActive(true);
+		}
 		}else{
 
 			buttons = new ChoiceButton[choices.Length];
