@@ -37,11 +37,13 @@ public class ConditionalController : MonoBehaviour {
 		GameMan.main.conditionals.SetValue("FREEDSMUGGLER", false);
 		GameMan.main.conditionals.SetValue("FREEDWHALER",false);
 		GameMan.main.conditionals.SetValue("WHALERUNCHAINED", false);
-		GameMan.main.conditionals.SetValue("SHIPBURNING", false);
+		GameMan.main.conditionals.SetValue("SHIPBURNING", true);
 		GameMan.main.conditionals.SetValue("RIGHTS", false);
 		GameMan.main.conditionals.SetValue("CONFLICT", false);
 		GameMan.main.conditionals.SetValue("NIGHTTIME", false);
 		GameMan.main.conditionals.SetValue("COOKWHISTLEEND", false);
+		GameMan.main.conditionals.SetValue("LOOKOUTTALKED", false);
+		GameMan.main.conditionals.SetValue("AMERICANTALKED", false);
 
 		BreadRoomSounds.GetComponent<AudioSource>().Play();
 	}
