@@ -43,7 +43,7 @@ public class TapInteractor : MonoBehaviour {
 		tapParticles.Emit(new Vector3(touchPos.x, touchPos.y, characterToMove.transform.position.z), Vector2.zero, 1f, 1f, Color.white);
 
 		//touching UI
-		if (screenTouchPos.y < .1f || screenTouchPos.y > .9f){ return; }
+		if (screenTouchPos.x < 0 || screenTouchPos.x > .95f){ return; }
 
 
 		if (hitInfo.collider != null){

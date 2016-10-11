@@ -13,7 +13,10 @@ public class DialogueTree : MonoBehaviour {
 	public bool zoomIn=false;
 	public float howMuchZoom=3;
 	public float howMuchRightMove = .5f;
+	public float howMuchMoveY = 1.0f;
 	public bool RightSideConvo=false;
+	public Vector3 cameraStartPoint = new Vector3(0f,1f,-100f);
+
 	CharacterAnimation characterNew;
 
 	void Awake(){
@@ -40,8 +43,10 @@ public class DialogueTree : MonoBehaviour {
 	public bool IsBlocked = false;
 
 	public void AdvanceDialogue(){
-		DialogueViewer.main.ZoomCamera=zoomIn;
-		DialogueViewer.main.moveright=RightSideConvo;
+		DialogueViewer.main.cameraObj.GetComponent<CameraMoves>().ZoomCamera=zoomIn;
+		DialogueViewer.main.cameraObj.GetComponent<CameraMoves>().moveright=RightSideConvo;
+		DialogueViewer.main.cameraObj.GetComponent<CameraMoves>().cameraStartPointReceiver=cameraStartPoint;
+	//	DialogueViewer.main.cameraObj.GetComponent<CameraMoves>().ResetCameraToNewCoordinates();
 		characterNew.TurnCharacterLeft(!RightSideConvo);
 			
 		if (current.IsComplete){

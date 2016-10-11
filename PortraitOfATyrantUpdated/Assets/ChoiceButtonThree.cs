@@ -14,6 +14,7 @@ public class ChoiceButtonThree : MonoBehaviour, ISelectHandler {
 	public Image img11Two;
 	public Image rightsImageChoice;
 	public Text rightsStringChoice;
+	public DialogueNode rightsGoBack;
 
 
 
@@ -37,7 +38,6 @@ public class ChoiceButtonThree : MonoBehaviour, ISelectHandler {
 
 		rightsImageChoice.sprite = DialogueNode.rightsImageMenu;
 		rightsStringChoice.text=DialogueNode.rightsLabelMenu;
-
 		ttt.text = choice.responseText;
 		this.onSubmit = onSubmit;
 	}

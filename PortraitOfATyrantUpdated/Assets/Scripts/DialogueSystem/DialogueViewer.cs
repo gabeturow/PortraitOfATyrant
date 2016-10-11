@@ -8,8 +8,6 @@ public class DialogueViewer : MonoBehaviour {
 	public ChoicePanel choicePanel{get; private set;}
 	public GameObject choicePromptDialogue;
 	public GameObject choicePromptGrievance;
-	public bool moveright=false;
-	public float howMuchMoveRight = .5f;
 	public GameObject characterOne;
 
 
@@ -21,15 +19,10 @@ public class DialogueViewer : MonoBehaviour {
 	public AudioSource audioSource;
 	//ManualLocalScaleSpring scaleSpring;
 	//ManualFloatDamper alphaDamper;
-	CanvasGroupFader fader;
-	CanvasGroupFader faderNew;
-	public bool ZoomCamera=true;
-
-	Camera camera;
-	float cameraX = 0f;
-	float cameraZoom = 0f;
+	public CanvasGroupFader fader;
+	public CanvasGroupFader faderNew;
 	public GameObject cameraObj;
-	public bool cameraGo=false;
+
 
 	const float advancerBuffer = .5f;
 	float advancerBufferTimer = 0f;
@@ -45,57 +38,26 @@ public class DialogueViewer : MonoBehaviour {
 		choicePanel = GetComponentInChildren<ChoicePanel>();
 		fader = gameObject.GetComponentInChildren<CanvasGroupFader>();
 		faderNew=dialogueGameObject.ForceGetComponent<CanvasGroupFader>();
-		camera=cameraObj.GetComponent<Camera>();
+
 	}
 
 	public void PlayDialogue(DialogueTree dialogue){
 		var d = ((GameObject)Instantiate(dialogue.gameObject)).GetComponent<DialogueTree>();
 		d.Init();
 		this.currentDialogue = d;
+
 		TryAdvance();
 		faderNew.displaying = true;
 
 		//Move the camera around when you click to start a dialogue
-		cameraGo=true;
+		cameraObj.GetComponent<CameraMoves>().cameraGo=true;
 	}
 
 
 	void Update(){
 
 		//Move the camera around when you click to start a dialogue
-		if(ZoomCamera){
-			camera.fieldOfView=cameraZoom;
-			cameraObj.transform.localPosition= new Vector3(cameraX,1f,-100f);
-
-
-			if(moveright){
-			if(cameraGo){
-				if(cameraX<currentDialogue.howMuchRightMove){
-					cameraX+=.01f;
-				}
-			}else if(cameraX>0f){
-				cameraX-=.02f;
-			}
-			}else if(cameraGo){
-				if(cameraX>-2f){
-					cameraX-=.01f;
-			}
-			}else if(cameraX<0f){
-					cameraX+=.02f;
-			}
-
-
-
-			if(cameraGo){
-				if(cameraZoom>currentDialogue.howMuchZoom){
-					cameraZoom-=.01f;
-				}
-			}else{
-				if(cameraZoom<5f){
-					cameraZoom+=.02f;
-				}
-			}
-		}
+	
 
 		if (autoAdvancer > 0) autoAdvancer -= Time.deltaTime;
 		if (advancerBufferTimer > 0) advancerBufferTimer -= Time.deltaTime;
@@ -142,7 +104,7 @@ public class DialogueViewer : MonoBehaviour {
 			Destroy(currentDialogue.gameObject);
 			currentDialogue = null;
 			//Move the camera back to normal position when you end a dialogue
-			cameraGo=false;
+			cameraObj.GetComponent<CameraMoves>().cameraGo=false;
 		}
 		else{
 			faderNew.displaying =true;
@@ -175,7 +137,7 @@ public class DialogueViewer : MonoBehaviour {
 			this.characterName.text = CurrentCharacter.name;
 			dialogueText.text = currentDialogue.CurrentMessage.text;
 			audioSource.PlayDelayed(playDelay);
-			autoAdvancer = (audioSource.clip == null ? 10f : audioSource.clip.length-1) + autoAdvancerDelay;
+			autoAdvancer = (audioSource.clip == null ? 10f : audioSource.clip.length-.2f) + autoAdvancerDelay;
 		}
 	}
 

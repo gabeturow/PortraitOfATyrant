@@ -20,12 +20,15 @@ public class ToastModule : InteractionModule {
 
 	public override void OnInteract ()
 	{
+		InventoryMan.main.selectedObject=InventoryMan.main.blank;
 		if (_message != ""){
 			if(delay==0){
 				Toaster.main.Show(_message);
+			
 			}else{
-
+				
 			StartCoroutine(GoToast());
+
 			}
 		}
 

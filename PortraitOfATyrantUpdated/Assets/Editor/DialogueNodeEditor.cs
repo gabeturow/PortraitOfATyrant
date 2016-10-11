@@ -17,7 +17,7 @@ using System.Collections;
 //	}
 //}
 //
-[CustomEditor(typeof(DialogueNode))]
+/*[CustomEditor(typeof(DialogueNode))]
 public class DialogueNodeEditor : Editor{
 	public override void OnInspectorGUI ()
 	{
@@ -45,4 +45,4 @@ public class DialogueNodeEditor : Editor{
 		serializedObject.ApplyModifiedProperties();
 	}
 
-}
+}*/

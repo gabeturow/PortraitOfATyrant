@@ -10,6 +10,7 @@ public class InventoryMan : MonoBehaviour {
 	public static InventoryMan main;
 
 	public InventoryObject selectedObject{get; set;}
+	public InventoryObject blank{get; set;}
 
 	private List<InventoryObject> _items;
 	protected List<InventoryObject> items{

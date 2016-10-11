@@ -9,7 +9,7 @@ public class ConditionalActivate : MonoBehaviour {
 	public bool turnItOn=true;
 
 	// Update is called once per frame
-	void Update () {
+	void Start () {
 
 
 		if(GameMan.main.conditionals.GetValue(BooleanName)){

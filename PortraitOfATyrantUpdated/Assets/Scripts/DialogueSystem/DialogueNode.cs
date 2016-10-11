@@ -15,7 +15,7 @@ public struct DialogueLine{
 
 public class DialogueNode : MonoBehaviour {
 
-
+	public static DialogueNode main;
 	public DialogueCharacter character;
 	public DialogueNode nextNode;
 

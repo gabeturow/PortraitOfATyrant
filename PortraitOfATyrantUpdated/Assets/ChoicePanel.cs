@@ -6,11 +6,13 @@ using System.Collections.Generic;
 
 public class ChoicePanel : MonoBehaviour {
 	public static ChoicePanel main;
+	GoBackButton goBackTemplate;
 	ChoiceButton template;
 	ChoiceButtonTwo templateTwo;
 	ChoiceButtonThree templateThree;
 	CanvasGroup canvasGroup;
 	CanvasGroupFader fader;
+	GoBackButton[] goBackButtons = new GoBackButton[0];
 	ChoiceButton[] buttons = new ChoiceButton[0];
 	ChoiceButtonTwo[] buttonsTwo = new ChoiceButtonTwo[0];
 	ChoiceButtonThree[] buttonsThree = new ChoiceButtonThree[0];
@@ -26,22 +28,23 @@ public class ChoicePanel : MonoBehaviour {
 
 
 	void Awake(){
+		goBackTemplate = GetComponentInChildren<GoBackButton>();
 		template = GetComponentInChildren<ChoiceButton>();
 		templateTwo = GetComponentInChildren<ChoiceButtonTwo>();
 		templateThree = GetComponentInChildren<ChoiceButtonThree>();
 		template.gameObject.SetActive(false);
 		templateTwo.gameObject.SetActive(false);
 		templateThree.gameObject.SetActive(false);
+		goBackTemplate.gameObject.SetActive(false);
 		scaleSpring = this.gameObject.ForceGetComponent<ManualLocalScaleSpring>();
 		scaleSpring.dampingRatio = 1.2f;
-		fader = gameObject.ForceGetComponent<CanvasGroupFader>();
+		fader = gameObject.GetComponent<CanvasGroupFader>();
 	}
 
 void Update(){
 
 
-	//	scaleSpring.target = isActive ? Vector3.one : new Vector3(1f, 0f, 1f);
-	//	scaleSpring.UpdateMe();
+		fader.displaying=isActive;
 	}
 
 	public void ClearChoices(){
@@ -52,6 +55,7 @@ void Update(){
 				Destroy(buttonsTwo[i].gameObject);
 			}
 			buttonsTwo = new ChoiceButtonTwo[0];
+		
 		}
 
 		if(GameMan.main.conditionals.GetValue("RIGHTS")){
@@ -59,6 +63,7 @@ void Update(){
 				Destroy(buttonsThree[i].gameObject);
 			}
 			buttonsThree = new ChoiceButtonThree[0];
+	
 		}
 		if(GameMan.main.conditionals.GetValue("DIALOGUE")){
 			for (int i = 0; i < buttons.Length; i++){
@@ -67,12 +72,30 @@ void Update(){
 			buttons = new ChoiceButton[0];
 		}
 
+
+
+
+	}
+	public void SetBackFunction(System.Action onSubmit){
+
+		if(goBackButtons.Length>0){
+			Destroy(goBackButtons[0].gameObject);
+		}
+		goBackButtons = new GoBackButton[1];
+		goBackButtons[0] = ((GameObject)Instantiate(goBackTemplate.gameObject)).GetComponent<GoBackButton>();
+		goBackButtons[0].gameObject.transform.parent = goBackTemplate.transform.parent;
+		var index1 = 0;
+
+		goBackButtons[0].Init(onSubmit);
+		//}
+		goBackButtons[0].gameObject.SetActive(true);
 	}
 
 	public void SetChoices(DialogueChoice[] choices, System.Action<int> onSubmit){
 		ClearChoices();
 		fader.displaying = true;
 		if(GameMan.main.conditionals.GetValue("GRIEVANCE")){
+			
 		buttonsTwo = new ChoiceButtonTwo[choices.Length];
 			for(int i = 0; i < choices.Length; i++){
 				buttonsTwo[i] = ((GameObject)Instantiate(templateTwo.gameObject)).GetComponent<ChoiceButtonTwo>();
@@ -82,6 +105,8 @@ void Update(){
 				buttonsTwo[i].Init(choices[i], ()=>{onSubmit(index);});
 				buttonsTwo[i].gameObject.SetActive(true);
 			}
+			//The go back Button
+
 
 		}else if(GameMan.main.conditionals.GetValue("RIGHTS")){
 			buttonsThree = new ChoiceButtonThree[choices.Length];

@@ -43,7 +43,7 @@ public class InventoryObjectRenderer : Selectable {
 		if (this.currentSelectionState == SelectionState.Highlighted){
 			yTarget = Mathf.Sin(Time.time * 4f) * 20f + 10f;
 		}
-		posSpring.target = new Vector2(index * ITEM_SPACING + ITEM_LEFT_SPACE, yTarget);
+		posSpring.target = new Vector2(yTarget,index * ITEM_SPACING + ITEM_LEFT_SPACE);
 		posSpring.UpdateMe();
 		scaleSpring.UpdateMe();
 	}
