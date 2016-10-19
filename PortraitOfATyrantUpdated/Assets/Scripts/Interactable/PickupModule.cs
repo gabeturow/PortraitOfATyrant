@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class PickupModule : InteractionModule {
 
 	[Tooltip("Make ID unique per each pickup item")]
+	public static PickupModule main;
 	public string id = "";
 	private string Identifier{
 		get{ if (id == ""){
@@ -30,6 +31,11 @@ public class PickupModule : InteractionModule {
 	}
 
 	public override void OnInteract(){
+
+		if (pickups.Contains(this.Identifier)){
+			Destroy(this.gameObject);
+		}
+
 		if (inventoryObj != null){
 			InventoryMan.main.Add(inventoryObj);
 			//pick up by adding this object to the internal hashset

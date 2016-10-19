@@ -18,6 +18,7 @@ public class DialogueNode : MonoBehaviour {
 	public static DialogueNode main;
 	public DialogueCharacter character;
 	public DialogueNode nextNode;
+	public InventoryObject inventoryObj;
 
 	public static Sprite rightsImageMenu;
 	public static string rightsLabelMenu;
@@ -29,14 +30,30 @@ public class DialogueNode : MonoBehaviour {
 	private GUIStyle labelStyle = new GUIStyle();
 	private StringBuilder sb = new StringBuilder();
 
+	//ITEM RELATED
+
+
+	/// ///////////////
+
+
 	System.Action onUnblock;
 
 
 	public virtual void Init(){
+		ReceiveItem(inventoryObj);
 		this.currentMessageIndex = -1;
 		//GameMan.main.conditionals.SetValue(condition, valueToSet);
 	}
 
+	public void ReceiveItem(InventoryObject inventory){
+
+	
+		if (inventoryObj != null){
+			InventoryMan.main.Add(inventoryObj);
+			//pick up by adding this object to the internal hashset
+		//	pickups.Add(this.Identifier);
+		}
+	}
 
 	public virtual DialogueLine CurrentMessage{ 
 		

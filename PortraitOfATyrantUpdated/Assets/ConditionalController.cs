@@ -29,8 +29,8 @@ public class ConditionalController : MonoBehaviour {
 		GameMan.main.conditionals.SetValue("FAN_GIVEN", false);
 		GameMan.main.conditionals.SetValue("CHESTOPEN", false);
 		GameMan.main.conditionals.SetValue("DRAWEROPEN", false);
-		GameMan.main.conditionals.SetValue("DUDINGSTONPOINTS", true);
-		GameMan.main.conditionals.SetValue("TALKEDSMUGGLER", true);
+		GameMan.main.conditionals.SetValue("DUDINGSTONPOINTS", false);
+		GameMan.main.conditionals.SetValue("TALKEDSMUGGLER", false);
 		GameMan.main.conditionals.SetValue("TALKEDWHALER", false);
 		GameMan.main.conditionals.SetValue("WHALERBEGIN", false);
 		GameMan.main.conditionals.SetValue("GRIEVANCE", false);
@@ -47,6 +47,9 @@ public class ConditionalController : MonoBehaviour {
 		GameMan.main.conditionals.SetValue("LOOKOUTTALKED", false);
 		GameMan.main.conditionals.SetValue("AMERICANTALKED", false);
 		GameMan.main.conditionals.SetValue("BETWEENNIGHTANDLOOKOUT", false);
+		GameMan.main.conditionals.SetValue("HOLDUNLOCKED", false);
+		GameMan.main.conditionals.SetValue("BREADUNLOCKED", false);
+		GameMan.main.conditionals.SetValue("MAGAZINEUNLOCKED", false);
 
 		BreadRoomSounds.GetComponent<AudioSource>().Play();
 	}
@@ -80,7 +83,7 @@ public class ConditionalController : MonoBehaviour {
 			grievancePanel.SetActive(false);
 			rightsPanel.SetActive(false);
 
-		}else if(GameMan.main.conditionals.GetValue("DIALOGUE")){	
+		}else{
 			GameMan.main.conditionals.SetValue("GRIEVANCE", false);
 			GameMan.main.conditionals.SetValue("RIDDLE", false);
 			GameMan.main.conditionals.SetValue("RIGHTS", false);
@@ -116,15 +119,17 @@ public class ConditionalController : MonoBehaviour {
 			belowDeckTheme.enabled=false;
 		}
 
-		if(GameMan.main.conditionals.GetValue("CONFLICT")){
-				conflictTheme.enabled=true;
-				belowDeckTheme.enabled=false;
-				upperDeckTheme.enabled=false;
-		}else if (GameMan.main.conditionals.GetValue("GRIEVANCE")){
+
+
+		if (GameMan.main.conditionals.GetValue("GRIEVANCE")){
 
 			belowDeckTheme.enabled=false;
 			conflictTheme.enabled=true;
 			upperDeckTheme.enabled=false;
+		}else if(GameMan.main.conditionals.GetValue("CONFLICT")){
+				conflictTheme.enabled=true;
+				belowDeckTheme.enabled=false;
+				upperDeckTheme.enabled=false;
 		}else{
 			conflictTheme.enabled=false;
 		}

@@ -299,7 +299,7 @@ public class CharacterAnimation : MonoBehaviour {
 				currentAnimator.SetBool("Laughing", false);
 				currentAnimator.SetInteger("PickUp", 0);
 				currentAnimator.SetBool("TightRope", false);
-				currentAnimator.SetTrigger("LightLamp");
+				currentAnimator.SetBool("LightLamp", true);
 				action = PlayingAnim.Idle;
 			}
 			break;

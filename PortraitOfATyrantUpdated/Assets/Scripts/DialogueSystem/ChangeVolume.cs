@@ -10,11 +10,11 @@ public class ChangeVolume : MonoBehaviour {
 			//Debug.Log (RoomMan.main.current.name=="CaptainsQuarters(Clone)");
 
 			if(RoomMan.main.current.name=="UpperDeck 1(Clone)"){
-					whichAudioSource.volume=.1f;
-			}else if(RoomMan.main.current.name=="UpperDeck 2(Clone)"){
-					whichAudioSource.volume=.2f;
-			}else if(RoomMan.main.current.name=="UpperDeck 3(Clone)"){
 					whichAudioSource.volume=.3f;
+			}else if(RoomMan.main.current.name=="UpperDeck 2(Clone)"){
+					whichAudioSource.volume=.5f;
+			}else if(RoomMan.main.current.name=="UpperDeck 3(Clone)"){
+					whichAudioSource.volume=.7f;
 			}else if(RoomMan.main.current.name=="Hold(Clone)"){
 				whichAudioSource.volume=0;
 			}

@@ -72,7 +72,12 @@ void Update(){
 			buttons = new ChoiceButton[0];
 		}
 
-
+		if(GameMan.main.conditionals.GetValue("RIDDLE")){
+		for (int i = 0; i < buttons.Length; i++){
+			Destroy(buttons[i].gameObject);
+		}
+		buttons = new ChoiceButton[0];
+		}
 
 
 	}
