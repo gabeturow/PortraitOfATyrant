@@ -15,6 +15,7 @@ public class ConditionalController : MonoBehaviour {
 	public GameObject grievancePanel;
 	public GameObject prompt;
 	public GameObject riddlePrompt;
+	public GameObject cookWhistling;
 	DialogueViewer dialogueViewer;
 	// Use this for initialization
 	void Start(){
@@ -50,6 +51,7 @@ public class ConditionalController : MonoBehaviour {
 		GameMan.main.conditionals.SetValue("HOLDUNLOCKED", false);
 		GameMan.main.conditionals.SetValue("BREADUNLOCKED", false);
 		GameMan.main.conditionals.SetValue("MAGAZINEUNLOCKED", false);
+		GameMan.main.conditionals.SetValue("COOKFINISHED", false);
 
 		BreadRoomSounds.GetComponent<AudioSource>().Play();
 	}
@@ -109,9 +111,11 @@ public class ConditionalController : MonoBehaviour {
 		if(GameMan.main.conditionals.GetValue("BELOWDECK")){// && !GameMan.main.conditionals.GetValue("GRIEVANCE")){
 			belowDeckTheme.enabled=true;
 			//conflictTheme.enabled=false;
+			cookWhistling.SetActive(true);
 			upperDeckTheme.enabled=false;
 		}else if (GameMan.main.conditionals.GetValue("UPPERDECK")){
 			upperDeckTheme.enabled=true;
+			cookWhistling.SetActive(false);
 			//conflictTheme.enabled=false;
 			belowDeckTheme.enabled=false;
 		}else{
@@ -148,5 +152,10 @@ public class ConditionalController : MonoBehaviour {
 			BreadRoomSounds.SetActive(false);
 		}
 
+		if(GameMan.main.conditionals.GetValue("COOKWHISTLEEND")){
+			cookWhistling.SetActive(false);
+		}else if(GameMan.main.conditionals.GetValue("COOKWHISTLEEND") && GameMan.main.conditionals.GetValue("UPPERDECK")==false ){
+			cookWhistling.SetActive(true);
+		}
 	}
 }
