@@ -12,7 +12,9 @@ public class DisplayIt : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(GameMan.main.conditionals.GetValue("MENURETURN")){
+			DisplayPanel();
+		}
 	}
 
 	public void DisplayPanel(){

@@ -16,6 +16,8 @@ public class ConditionalController : MonoBehaviour {
 	public GameObject prompt;
 	public GameObject riddlePrompt;
 	public GameObject cookWhistling;
+	public GameObject startMenu;
+
 	DialogueViewer dialogueViewer;
 	// Use this for initialization
 	void Start(){
@@ -52,6 +54,8 @@ public class ConditionalController : MonoBehaviour {
 		GameMan.main.conditionals.SetValue("BREADUNLOCKED", false);
 		GameMan.main.conditionals.SetValue("MAGAZINEUNLOCKED", false);
 		GameMan.main.conditionals.SetValue("COOKFINISHED", false);
+		GameMan.main.conditionals.SetValue("MENURETURN", false);
+
 
 		BreadRoomSounds.GetComponent<AudioSource>().Play();
 	}
@@ -139,7 +143,9 @@ public class ConditionalController : MonoBehaviour {
 		}
 
 
-
+		/*if(GameMan.main.conditionals.GetValue("STARTMENU")){
+			startMenu.GetComponent<CanvasGroupFader>().displaying=true;
+		}*/
 
 		//CONTROLS WHALER SINGING
 		if(GameMan.main.conditionals.GetValue("WHALERSINGING")){

@@ -10,12 +10,18 @@ public class HideElements : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
+	IEnumerator ChangeButtonText(){
+		yield return new WaitForSeconds(3);
+		GameMan.main.conditionals.SetValue("STARTED", true);
+
+	}
 	public void HideAll(){
 		GameMan.main.conditionals.SetValue("CONFLICT", false);
 		GameMan.main.conditionals.SetValue("BELOWDECK", true);
+		StartCoroutine(ChangeButtonText());
 		this.GetComponent<CanvasGroupFader>().displaying=false;
 		//this.gameObject.SetActive(false);
 

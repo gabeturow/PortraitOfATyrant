@@ -63,9 +63,9 @@ public class CameraMoves : MonoBehaviour {
 			float baseline=5f;
 			////  Move Z - Field of View
 			if(cameraGo){
-				if(cameraZoom<(baseline+.001) && cameraZoom>dialogueViewer.currentDialogue.howMuchZoom){
+				if(cameraZoom<(baseline+.001) && cameraZoom>=dialogueViewer.currentDialogue.howMuchZoom){
 					cameraZoom-=.01f;
-				}else if(cameraZoom>(baseline+.001) && cameraZoom<dialogueViewer.currentDialogue.howMuchZoom){
+				}else if(baseline<dialogueViewer.currentDialogue.howMuchZoom && cameraZoom<dialogueViewer.currentDialogue.howMuchZoom){
 					cameraZoom+=.01f;
 				}
 			}else{

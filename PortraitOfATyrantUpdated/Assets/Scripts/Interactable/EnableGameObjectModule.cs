@@ -4,16 +4,24 @@ using System.Collections;
 public class EnableGameObjectModule : InteractionModule {
 
 	public bool valueToSet;
-//	public GameObject objectToSet;
+	public float delayTurnOn;
 	public Transform transform;
+
+
+	IEnumerator GoTransform(){
+		yield return new WaitForSeconds(delayTurnOn);
+		if(transform!=null){
+			transform.gameObject.SetActive(valueToSet);
+		}
+	}
+
 
 	public override void OnInteract ()
 	{
 		base.OnInteract ();
-		//objectToSet.SetActive(valueToSet);
-		if(transform!=null){
-			transform.gameObject.SetActive(valueToSet);
-		}
+
+	StartCoroutine(GoTransform());
+		
 	}
 
 }
