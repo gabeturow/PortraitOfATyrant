@@ -85,7 +85,7 @@ public class CharacterAnimation : MonoBehaviour {
 		facing=Face.Right;
 		action = PlayingAnim.Walk;
 		currentAnimator.SetBool("ClimbUp", false);
-
+		currentAnimator.SetBool("Idle", true);
 	Back.transform.localScale = new Vector3(0, 0, 0);
 	
 	Side.transform.localScale = new Vector3(1, 1, 1);

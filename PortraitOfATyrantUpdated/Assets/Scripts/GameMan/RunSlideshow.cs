@@ -20,6 +20,7 @@ public class RunSlideshow : MonoBehaviour {
 	public bool fadeOut=true;
 	public bool music=true;
 	public GameObject levelContent;
+	public GameObject panelObject;
 
 	//public GameObject condition;
 
@@ -60,7 +61,7 @@ IEnumerator Start() {
 		fadeOut=false;
 		yield return new WaitForSeconds(waitTime/2f);
 		//}
-		for(x=0;x<slides.Length-2; x++){
+		for(x=0;x<slides.Length-1; x++){
 			if(slides[x]!=null){
 				fadeOut=true;
 				currentSlide=slides[x];
@@ -71,31 +72,24 @@ IEnumerator Start() {
 
 		}
 		
-		if(!endingTrue){
-		GameMan.main.conditionals.SetValue("CONFLICT", false);
-		GameMan.main.conditionals.SetValue("BELOWDECK", true);
-		}
+
 		//cmusic=false;
 		fadeOut=true;
-		currentSlide=slides[slides.Length-2];
-		yield return new WaitForSeconds(waitTime);
-		fadeOut=false;
-		yield return new WaitForSeconds(.8f);
-
-		fadeOut=true;
 		currentSlide=slides[slides.Length-1];
-		yield return new WaitForSeconds(waitTime);
+		yield return new WaitForSeconds(waitTime*2);
 		fadeOut=false;
-	
 		yield return new WaitForSeconds(.8f);
 
-		fadeOut=true;
-		fadeOut2=true;
-
-			fadeOut=false;
 		button.SetActive(false);
 		yield return new WaitForSeconds(1);
+		if(!endingTrue){
+			GameMan.main.conditionals.SetValue("CONFLICT", false);
+			GameMan.main.conditionals.SetValue("BELOWDECK", true);
+		}
 		slideshowFaderObject.GetComponent<CanvasGroupFader>().displaying=false;
+		if(panelObject!=null){
+		panelObject.GetComponent<CanvasGroupFader>().displaying=true;
+		}
 		if(levelContent!=null){
 		levelContent.SetActive(true);
 		}
