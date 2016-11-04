@@ -24,6 +24,7 @@ public class InventoryObjectRenderer : Selectable {
 		return rend;
 	}
 
+
 	public override void OnSelect (UnityEngine.EventSystems.BaseEventData eventData)
 	{
 		base.OnSelect (eventData);
@@ -31,6 +32,7 @@ public class InventoryObjectRenderer : Selectable {
 		scaleSpring.dampingRatio = .7f;
 		InventoryMan.main.selectedObject = this.inventoryObj;
 	}
+
 
 	void Awake(){
 		posSpring = gameObject.ForceGetComponent<ManualLocalRectPositionSpring>();
