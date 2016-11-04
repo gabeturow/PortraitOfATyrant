@@ -37,12 +37,13 @@ public class PickupModule : InteractionModule {
 		}
 
 		if (inventoryObj != null){
-			BigItemViewer.main.Show(inventoryObj.inventorySprite,
-				()=>{
-					InventoryMan.main.Add(inventoryObj);
-					pickups.Add(this.Identifier);
-					Destroy(this.gameObject);
-				});
+			BigItemViewer.main.Show(inventoryObj.inventorySprite, AddObjectToInventory);
 		}
+	}
+
+	void AddObjectToInventory(){
+		InventoryMan.main.Add(inventoryObj);
+		pickups.Add(this.Identifier);
+		Destroy(this.gameObject);
 	}
 }
