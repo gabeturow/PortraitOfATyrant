@@ -31,7 +31,7 @@ public class TapInteractor : MonoBehaviour {
 	}
 
 	void MovementInteractionUpdate(){
-		if (DialogueViewer.main.currentDialogue != null) return;
+		if (DialogueViewer.main.currentDialogue != null || BigItemViewer.main.active) return;
 
 		queuedInteraction = null;
 		Vector3 mouseRayPos = Input.mousePosition;
