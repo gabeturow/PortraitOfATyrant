@@ -3,19 +3,31 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class BigItemViewer : MonoBehaviour {
+
+	#region properties
+
 	public static BigItemViewer main { get; private set; }
 	public bool active { get { return fader.displaying; } }
 
-	const float SCALESPEED = 5f;
+	#endregion
+
+
+
+	#region vars 
+
+	float imageScaleSpeed = 5f;
 
 	CanvasGroupFader fader;
-
 	Button backButton;
 	Image itemImage;
 
 	System.Action onFinishInspect;
 
+	#endregion
 
+
+
+	#region publics
 
 	public void Show(Sprite itemSprite, System.Action onFinishInspect = null){
 		this.itemImage.sprite = itemSprite;
@@ -27,6 +39,11 @@ public class BigItemViewer : MonoBehaviour {
 		fader.displaying = false;
 		FireOnFinishInspectCallback();
 	}
+
+	#endregion
+
+
+	#region monobehaviour
 
 
 	void Awake(){
@@ -42,10 +59,14 @@ public class BigItemViewer : MonoBehaviour {
 		UpdateImageScale();
 	}
 
+	#endregion
+
+
 	void UpdateImageScale(){
 		var targetScale = this.active ? Vector3.one : Vector3.zero;
-		var dist = Vector3.Distance(this.itemImage.transform.localScale, targetScale);
-		this.itemImage.transform.localScale = Vector3.Lerp(this.itemImage.transform.localScale, targetScale, Time.deltaTime * SCALESPEED);
+		var currentScale = this.itemImage.transform.localScale;
+		var newScale = Vector3.Lerp(currentScale, targetScale, Time.deltaTime * imageScaleSpeed);
+		this.itemImage.transform.localScale = newScale;
 	}
 
 	void SetOnFinishCallback(System.Action onFinishInspect){
