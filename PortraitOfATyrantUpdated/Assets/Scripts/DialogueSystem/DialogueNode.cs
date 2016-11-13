@@ -20,6 +20,8 @@ public class DialogueNode : MonoBehaviour {
 	public DialogueNode nextNode;
 	public InventoryObject inventoryObj;
 
+	protected OnEnterNode[] onEnter;
+
 	public static Sprite rightsImageMenu;
 	public static string rightsLabelMenu;
 
@@ -38,11 +40,24 @@ public class DialogueNode : MonoBehaviour {
 
 	System.Action onUnblock;
 
-
 	public virtual void Init(){
+		onEnter = this.GetComponents<OnEnterNode>();
+		for (int i = 0; i < onEnter.Length; i++) {
+			onEnter[i].OnEnter(this);
+		}
 		ReceiveItem(inventoryObj);
 		this.currentMessageIndex = -1;
 		//GameMan.main.conditionals.SetValue(condition, valueToSet);
+	}
+
+	public bool CanAdvance(){
+		if (onEnter != null) {
+			for (int i = 0; i < onEnter.Length; i++) {
+				if (!onEnter[i].IsFinished())
+					return false;
+			}
+		}
+		return true;
 	}
 
 	public void ReceiveItem(InventoryObject inventory){
