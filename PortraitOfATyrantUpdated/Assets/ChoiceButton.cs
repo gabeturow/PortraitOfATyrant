@@ -26,8 +26,6 @@ public class ChoiceButton : MonoBehaviour, ISelectHandler {
 			grievancePanel.SetActive(false);
 		}
 		*/
-		Debug.Log(choice.responseText);
-		Debug.Log(t.text);
 		if(choice.grievanceImage!=null && img1!=null){
 		img1.sprite=choice.grievanceImage;
 		}
