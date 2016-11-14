@@ -37,7 +37,7 @@ public class PickupModule : InteractionModule {
 		}
 
 		if (inventoryObj != null){
-			BigItemViewer.main.Show(inventoryObj.inventorySprite, AddObjectToInventory);
+			UIMan.bigItemViewer.Show(inventoryObj.inventorySprite, AddObjectToInventory);
 		}
 	}
 

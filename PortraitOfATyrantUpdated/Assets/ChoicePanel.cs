@@ -104,7 +104,7 @@ void Update(){
 		buttonsTwo = new ChoiceButtonTwo[choices.Length];
 			for(int i = 0; i < choices.Length; i++){
 				buttonsTwo[i] = ((GameObject)Instantiate(templateTwo.gameObject)).GetComponent<ChoiceButtonTwo>();
-				buttonsTwo[i].gameObject.transform.parent = templateTwo.transform.parent;
+				buttonsTwo[i].gameObject.transform.SetParent(templateTwo.transform.parent, false);
 				var index = i;
 
 				buttonsTwo[i].Init(choices[i], ()=>{onSubmit(index);});
@@ -117,7 +117,7 @@ void Update(){
 			buttonsThree = new ChoiceButtonThree[choices.Length];
 		for(int i = 0; i < choices.Length; i++){
 			buttonsThree[i] = ((GameObject)Instantiate(templateThree.gameObject)).GetComponent<ChoiceButtonThree>();
-			buttonsThree[i].gameObject.transform.parent = templateThree.transform.parent;
+				buttonsThree[i].gameObject.transform.SetParent(templateThree.transform.parent, false);
 			var index = i;
 
 			buttonsThree[i].Init(choices[i], ()=>{onSubmit(index);});
@@ -128,7 +128,7 @@ void Update(){
 			buttons = new ChoiceButton[choices.Length];
 			for(int i = 0; i < choices.Length; i++){
 				buttons[i] = ((GameObject)Instantiate(template.gameObject)).GetComponent<ChoiceButton>();
-				buttons[i].gameObject.transform.parent = template.transform.parent;
+				buttons[i].gameObject.transform.SetParent(template.transform.parent, false);
 				var index = i;
 
 				buttons[i].Init(choices[i], ()=>{onSubmit(index);});
