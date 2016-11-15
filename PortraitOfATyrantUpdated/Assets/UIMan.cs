@@ -4,10 +4,9 @@ using System.Collections;
 public class UIMan : MonoBehaviour {
 
 	public static UIMan main 							{ get; private set; }
-
+	public static bool declarationStatus=false;
 	public static BigItemViewer bigItemViewer			{ get; private set; }
 	public static DeclarationViewer declarationViewer 	{ get; private set; }
-
 
 	public bool IsPanelActive(){
 		return bigItemViewer.active || declarationViewer.active;
@@ -20,7 +19,7 @@ public class UIMan : MonoBehaviour {
 		bigItemViewer = GetComponentInChildren<BigItemViewer>();
 		declarationViewer = GetComponentInChildren<DeclarationViewer>();
 	}
-
+		
 	bool EnsureSingleton(){
 		if (main != null) {
 			Debug.LogError("UIMan already exists!");

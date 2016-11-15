@@ -31,6 +31,10 @@ public class PopUpViewer : MonoBehaviour {
 
 
 	#region publics
+	public void Hide(){
+		fader.displaying = false;
+		FireOnFinishInspectCallback();
+	}
 
 	public void Show(Sprite itemSprite = null, System.Action onFinishInspect = null){
 		if (itemSprite != null) {
@@ -38,12 +42,13 @@ public class PopUpViewer : MonoBehaviour {
 		}
 		fader.displaying = true;
 		SetOnFinishCallback(onFinishInspect);
+		Invoke("Hide",10f);
 	}
 
-	public void Hide(){
-		fader.displaying = false;
-		FireOnFinishInspectCallback();
-	}
+
+
+
+
 
 	#endregion
 
