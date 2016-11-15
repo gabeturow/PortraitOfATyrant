@@ -7,6 +7,7 @@ public class UIMan : MonoBehaviour {
 
 	public static BigItemViewer bigItemViewer			{ get; private set; }
 	public static DeclarationViewer declarationViewer 	{ get; private set; }
+	public static BillOfRightsViewer billOfRightsViewer { get; private set; }
 
 
 	public bool IsPanelActive(){
@@ -19,6 +20,7 @@ public class UIMan : MonoBehaviour {
 		}
 		bigItemViewer = GetComponentInChildren<BigItemViewer>();
 		declarationViewer = GetComponentInChildren<DeclarationViewer>();
+		billOfRightsViewer = GetComponentInChildren<BillOfRightsViewer>();
 	}
 
 	bool EnsureSingleton(){
