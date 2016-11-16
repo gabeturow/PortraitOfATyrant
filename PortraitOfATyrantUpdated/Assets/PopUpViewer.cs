@@ -18,11 +18,13 @@ public class PopUpViewer : MonoBehaviour {
 
 	#region vars 
 
+	protected bool canHide = true;
+	float hideTimer;
 	float imageScaleSpeed = 5f;
 
-	CanvasGroupFader fader;
+	protected CanvasGroupFader fader;
 	Button backButton;
-	Image itemImage;
+	protected Image itemImage;
 
 	System.Action onFinishInspect;
 
@@ -32,17 +34,20 @@ public class PopUpViewer : MonoBehaviour {
 
 	#region publics
 
-	public void Show(Sprite itemSprite = null, System.Action onFinishInspect = null){
+	public void Hide(){
+		if (!canHide) return;
+		hideTimer = 0f;
+		fader.displaying = false;
+		FireOnFinishInspectCallback();
+	}
+
+	public virtual void Show(Sprite itemSprite = null, System.Action onFinishInspect = null){
 		if (itemSprite != null) {
 			this.itemImage.sprite = itemSprite;
 		}
 		fader.displaying = true;
 		SetOnFinishCallback(onFinishInspect);
-	}
-
-	public void Hide(){
-		fader.displaying = false;
-		FireOnFinishInspectCallback();
+		hideTimer = 5f;
 	}
 
 	#endregion
@@ -60,11 +65,20 @@ public class PopUpViewer : MonoBehaviour {
 	}
 
 	void Update(){
+		HideTimerUpdate();
 		UpdateImageScale();
 	}
 
 	#endregion
 
+	void HideTimerUpdate(){
+		if (hideTimer > 0f) {
+			hideTimer -= Time.deltaTime;
+			if (hideTimer <= 0f) {
+				Hide();
+			}
+		}
+	}
 
 	void UpdateImageScale(){
 		var targetScale = this.active ? Vector3.one : Vector3.zero;
