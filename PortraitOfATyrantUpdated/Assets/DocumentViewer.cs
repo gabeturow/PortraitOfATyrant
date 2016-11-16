@@ -3,24 +3,22 @@ using System.Collections;
 
 public class DocumentViewer : PopUpViewer {
 
-	[SerializeField]
+	[Tooltip("Passage index corresponds to order in heirarchy")]
+
 	AnimatedPassage[] passages;
 
-
-	protected override void Awake (){
-		base.Awake();
+	void Start(){
+		GetAllPassages();
 		HideAllPassages();
 	}
 
 
+
 	public void AnimateReveal(int passageNumber){
-		UIMan.main.TurnOnDeclaration();
 		//animate in our passage we selected
 		var passage = passages[passageNumber];
 		passage.AnimateIn();
 	
-
-
 		//fade in half opacity declaration
 		//fade in full opacity declaration img after seconds
 		SetHalfOpacityDeclaration();
@@ -45,6 +43,10 @@ public class DocumentViewer : PopUpViewer {
 
 	void EnablePanelHiding(){
 		canHide = true;
+	}
+
+	void GetAllPassages(){
+		passages = GetComponentsInChildren<AnimatedPassage>();
 	}
 
 	void HideAllPassages(){

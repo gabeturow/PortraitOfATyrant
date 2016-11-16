@@ -7,10 +7,8 @@ public class AnimatedPassage : MonoBehaviour {
 
 	#region vars
 
-	[SerializeField]
 	Image image;
 
-	[SerializeField]
 	Image imageEnd;
 
 	const float ANIM_SPEED = 10;
@@ -19,6 +17,16 @@ public class AnimatedPassage : MonoBehaviour {
 	bool isAnimating;
 
 	#endregion
+
+	void Awake(){
+		image = transform.FindChild("PassageBegin").GetComponent<Image>();
+		imageEnd = transform.FindChild("PassageEnd").GetComponent<Image>();
+
+		imageEnd.gameObject.SetActive(false);
+		scaleDamper = new DTweenVector2(image.rectTransform.sizeDelta, ANIM_SPEED);
+		isAnimating = false;
+	}
+
 
 	public void Hide(){
 		image.CrossFadeAlpha(0f, 0f, true);
@@ -37,11 +45,6 @@ public class AnimatedPassage : MonoBehaviour {
 		isAnimating = true;
 	}
 
-	void Awake(){
-		imageEnd.gameObject.SetActive(false);
-		scaleDamper = new DTweenVector2(image.rectTransform.sizeDelta, ANIM_SPEED);
-		isAnimating = false;
-	}
 
 	void Update(){
 		if (isAnimating) {
