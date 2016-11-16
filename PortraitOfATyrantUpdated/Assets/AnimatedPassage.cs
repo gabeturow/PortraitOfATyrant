@@ -33,6 +33,7 @@ public class AnimatedPassage : MonoBehaviour {
 	}
 
 	void StartAnimation(){
+		//UIMan.main.TurnOnDeclaration();
 		isAnimating = true;
 	}
 
