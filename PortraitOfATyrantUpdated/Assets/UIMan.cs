@@ -25,8 +25,13 @@ public class UIMan : MonoBehaviour {
 	}
 
 	public void TurnOnDeclaration(){
-		declarationObject.SetActive(declarationStatus);
-		rightsObject.SetActive(!declarationStatus);
+		if(declarationStatus){
+		declarationObject.SetActive(true);
+		rightsObject.SetActive(false);
+		}else{
+		rightsObject.SetActive(true);
+		declarationObject.SetActive(false);
+		}
 	}
 
 	bool EnsureSingleton(){

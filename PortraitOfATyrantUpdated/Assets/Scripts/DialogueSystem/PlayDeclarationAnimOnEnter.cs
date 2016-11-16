@@ -9,6 +9,7 @@ public class PlayDeclarationAnimOnEnter : OnEnterNode{
 	public override void OnEnter (DialogueNode node)
 	{
 		UIMan.main.declarationStatus=declarationActive;
+	
 		UIMan.documentViewer.Show(null, SetFinished);
 		UIMan.documentViewer.AnimateReveal(passageNumber);
 

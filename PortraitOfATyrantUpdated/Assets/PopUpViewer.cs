@@ -45,6 +45,7 @@ public class PopUpViewer : MonoBehaviour {
 		if (itemSprite != null) {
 			this.itemImage.sprite = itemSprite;
 		}
+
 		fader.displaying = true;
 		SetOnFinishCallback(onFinishInspect);
 		hideTimer = 5f;
