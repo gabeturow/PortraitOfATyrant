@@ -37,7 +37,7 @@ public class AnimatedPassage : MonoBehaviour {
 		image.CrossFadeAlpha(1f, .5f, true);
 
 		//fade image out after seconds
-		Invoke("StartAnimation", 1f);
+		Invoke("StartAnimation", 2f);
 	}
 
 	void StartAnimation(){
