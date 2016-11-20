@@ -22,7 +22,7 @@ public class DocumentViewer : PopUpViewer {
 		//fade in half opacity declaration
 		//fade in full opacity declaration img after seconds
 		SetHalfOpacityDeclaration();
-		Invoke("FadeInDeclaration", 2f);
+		Invoke("FadeInDeclaration", 4f);
 
 		//don't allow user to dismiss this panel until seconds pass
 		DisablePanelHiding();
