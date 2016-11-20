@@ -14,6 +14,13 @@ public class InventoryObject : ScriptableObject {
 	public string description;
 	public Sprite inventorySprite;
 
+	[TextArea(2, 10)]
+	public string toastDescription;
+
+	[TextArea(3, 10)]
+	public string longDescription;
+
+
 	public ObjectType type;
 
 

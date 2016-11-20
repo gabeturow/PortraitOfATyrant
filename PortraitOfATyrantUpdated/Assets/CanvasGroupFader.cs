@@ -14,7 +14,7 @@ public class CanvasGroupFader : MonoBehaviour {
 	}
 
 	public bool isVisible{
-		get{ return cGroup.alpha < .01f && !displaying; }
+		get{ return cGroup.alpha > .05f && !displaying; }
 	}
 
 	public bool displaying = false;

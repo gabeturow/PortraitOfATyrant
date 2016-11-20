@@ -35,7 +35,7 @@ public class InventoryFlyoutMenu : MonoBehaviour {
 
 	void Inspect(){
 		if (currentItem != null) {
-
+			UIMan.itemInspector.Show(this.currentItem, null);
 		}
 		Hide();
 	}
