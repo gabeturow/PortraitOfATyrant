@@ -7,12 +7,13 @@ public class UIMan : MonoBehaviour {
 
 	//subsystems
 	public static BigItemViewer bigItemViewer			{ get; private set; }
+	public static ItemInspector itemInspector			{ get; private set; }
 	public static DocumentViewer declaration			{ get; private set; }
 	public static DocumentViewer billOfRights			{ get; private set; }
 
 
 	public bool IsPanelActive(){
-		return bigItemViewer.active || declaration.active || billOfRights.active;
+		return bigItemViewer.active || declaration.active || billOfRights.active || itemInspector.active;
 	}
 
 	void Awake(){
@@ -26,6 +27,7 @@ public class UIMan : MonoBehaviour {
 
 	internal void InstantiateSubsystems(){
 		bigItemViewer = CreateSubsystem<BigItemViewer>("BigItemViewer");
+		itemInspector = CreateSubsystem<ItemInspector>("ItemInspector");
 		declaration = CreateSubsystem<DocumentViewer>("DeclarationViewer");
 		billOfRights = CreateSubsystem<DocumentViewer>("BillOfRightsViewer");
 	}

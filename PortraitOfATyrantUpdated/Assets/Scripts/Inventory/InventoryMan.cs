@@ -9,6 +9,7 @@ public class InventoryMan : MonoBehaviour {
 
 	public static InventoryMan main;
 
+
 	public InventoryObject selectedObject{get; set;}
 	public InventoryObject blank{get; set;}
 
@@ -22,9 +23,13 @@ public class InventoryMan : MonoBehaviour {
 
 	private List<InventoryObjectRenderer> itemRenderers = new List<InventoryObjectRenderer>();
 
+	private InventoryFlyoutMenu flyoutMenu;
 
 	void Awake(){
 		main = this;
+		flyoutMenu = PrefabManager.Instantiate("InventoryFlyout").GetComponent<InventoryFlyoutMenu>();
+		flyoutMenu.transform.SetParent(this.transform);
+		flyoutMenu.Hide();
 	}
 
 	void Update(){
@@ -32,6 +37,14 @@ public class InventoryMan : MonoBehaviour {
 			itemRenderers[i].index = i;
 			itemRenderers[i].UpdateMe();
 		}
+	}
+
+	public void ShowFlyoutMenu(InventoryObjectRenderer objRenderer){
+		flyoutMenu.Show(objRenderer);
+	}
+
+	public void SelectObject(InventoryObjectRenderer objrenderer){
+		this.selectedObject = objrenderer.inventoryObj;
 	}
 
 	public InventoryObject[] GetGrievances(){

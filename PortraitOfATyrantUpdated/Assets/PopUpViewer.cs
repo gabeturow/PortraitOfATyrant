@@ -10,7 +10,7 @@ public class PopUpViewer : MonoBehaviour {
 
 	#region properties
 
-	public bool active { get { return fader.displaying; } }
+	public bool active { get { return fader.isVisible; } }
 
 	#endregion
 
@@ -19,7 +19,7 @@ public class PopUpViewer : MonoBehaviour {
 	#region vars 
 
 	protected bool canHide = true;
-	float hideTimer;
+	protected float hideTimer;
 	float imageScaleSpeed = 5f;
 
 	protected CanvasGroupFader fader;
@@ -82,7 +82,7 @@ public class PopUpViewer : MonoBehaviour {
 	}
 
 	void UpdateImageScale(){
-		var targetScale = this.active ? Vector3.one : Vector3.zero;
+		var targetScale = fader.displaying ? Vector3.one : Vector3.zero;
 		var currentScale = this.itemImage.transform.localScale;
 		var newScale = Vector3.Lerp(currentScale, targetScale, Time.deltaTime * imageScaleSpeed);
 		this.itemImage.transform.localScale = newScale;

@@ -30,7 +30,7 @@ public class InventoryObjectRenderer : Selectable {
 		base.OnSelect (eventData);
 		scaleSpring.velocity -= new Vector3(5f, 5f, 5f);
 		scaleSpring.dampingRatio = .7f;
-		InventoryMan.main.selectedObject = this.inventoryObj;
+		InventoryMan.main.ShowFlyoutMenu(this);
 	}
 
 
