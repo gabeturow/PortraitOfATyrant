@@ -69,10 +69,10 @@ public class CameraMoves : MonoBehaviour {
 					cameraZoom+=.01f;
 				}
 			}else{
-						if(cameraZoom<5f){
+						if(cameraZoom<8f){
 					cameraZoom+=.02f;
 					}
-						if(cameraZoom>5f){
+						if(cameraZoom>8f){
 							cameraZoom-=.02f;
 						}
 
