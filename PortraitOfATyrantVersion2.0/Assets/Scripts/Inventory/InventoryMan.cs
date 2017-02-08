@@ -67,6 +67,9 @@ public class InventoryMan : MonoBehaviour {
 			rend.transform.parent = this.transform;
 			itemRenderers.Add(rend);
 		}
+		Destroy(flyoutMenu.gameObject);
+		flyoutMenu = PrefabManager.Instantiate("InventoryFlyout").GetComponent<InventoryFlyoutMenu>();
+		flyoutMenu.transform.SetParent(this.transform);
 	}
 
 	public void Remove(InventoryObject obj){

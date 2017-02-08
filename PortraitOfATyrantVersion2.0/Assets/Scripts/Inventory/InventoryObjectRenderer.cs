@@ -31,6 +31,7 @@ public class InventoryObjectRenderer : Selectable {
 		base.OnSelect (eventData);
 		scaleSpring.velocity -= new Vector3(5f, 5f, 5f);
 		scaleSpring.dampingRatio = .7f;
+		posSpring.dampingRatio=1000f;
 		InventoryMan.main.ShowFlyoutMenu(this);
 	}
 
@@ -45,9 +46,10 @@ public class InventoryObjectRenderer : Selectable {
 	public void UpdateMe(){
 		float yTarget = 0f;
 		if (this.currentSelectionState == SelectionState.Highlighted){
-			yTarget = Mathf.Sin(Time.time * 4f) * 10f - 10f;
+		//	yTarget = Mathf.Sin(Time.time * 4f) * 10f - 10f;
 		}
 		posSpring.target = new Vector2(yTarget,index * ITEM_SPACING + ITEM_LEFT_SPACE);
+
 		posSpring.UpdateMe();
 		scaleSpring.UpdateMe();
 	}

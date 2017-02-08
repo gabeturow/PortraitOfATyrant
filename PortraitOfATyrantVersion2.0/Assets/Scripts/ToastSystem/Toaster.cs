@@ -65,7 +65,7 @@ public class Toaster : MonoBehaviour {
 
 		if (showTimer > 0){
 			showTimer -= Time.deltaTime;
-			if (showTimer <= 0){
+			if (showTimer <= 10){
 				Hide();
 			}
 		}

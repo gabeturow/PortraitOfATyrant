@@ -7,9 +7,16 @@ public class DialogueModule : InteractionModule {
 	[SerializeField]
 	DialogueTree dialogue;
 
+	[SerializeField]
+	float delayTime=0;
+
+	void PlayDialogue(){
+		DialogueViewer.main.PlayDialogue(dialogue);
+	}
 	public override void OnInteract ()
 	{
-		DialogueViewer.main.PlayDialogue(dialogue);;
+		Invoke("PlayDialogue",delayTime);
+
 	}
 
 }

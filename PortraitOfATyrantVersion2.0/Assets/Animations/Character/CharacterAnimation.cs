@@ -8,7 +8,7 @@ public class CharacterAnimation : MonoBehaviour {
 	public CanvasGroupFader openingCredits;
 	public GameObject playerObject;
 	public bool tempFirst=false;
-
+	public bool introLevel1=false;
 
 	public enum Face{
 		Front, Left, Right, Back}
@@ -20,6 +20,7 @@ public class CharacterAnimation : MonoBehaviour {
 	public PlayingAnim action;
 
 	public bool stairUp, stairDown;
+
 
 
 	void Start () {
@@ -43,20 +44,24 @@ public class CharacterAnimation : MonoBehaviour {
 	}
 
 	void Update () {
-		Debug.Log(GameMan.main.conditionals.GetValue("STARTGAME"));
+	/*	Debug.Log(GameMan.main.conditionals.GetValue("STARTGAME"));
 		if(GameMan.main.conditionals.GetValue("STARTED") && !tempFirst){
-			playerObject.transform.localScale=Vector3.zero;
+			//playerObject.transform.localScale=Vector3.zero;
 			//TapInteractor.main.enabled = false;
 			//playerObject.transform.localPosition=new Vector3(-15f,0f,0f);
-			Invoke("TurnOnPlayer",4);
 			//Invoke("TurnOnPlayerLeft",7);
 			Invoke("OpeningCredits",4);
 			tempFirst=true;
 		}
-
+*/
 
 		//CHANGE SPRITE OBJECT DEPENDING ON WHICH WAY HE IS FACING
 
+		if(introLevel1){
+			facing=Face.Front;
+			currentAnimator.SetBool("DropCeiling", true);
+		}
+	
 		switch (facing){
 		//IF FACING THE FRONT
 		case Face.Front:
@@ -152,6 +157,7 @@ public class CharacterAnimation : MonoBehaviour {
 	}
 
 
+		
 	void PlayAnim(PlayingAnim anim){
 		switch (anim){
 		case PlayingAnim.Idle:
