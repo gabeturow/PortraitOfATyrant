@@ -64,6 +64,8 @@ public class ConditionalController : MonoBehaviour {
 		GameMan.main.conditionals.SetValue("FINISHEDAMERICAN", false);
 		GameMan.main.conditionals.SetValue("TALKEDCOOK", false);
 		GameMan.main.conditionals.SetValue("FINISHEDCOOK", false);
+		GameMan.main.conditionals.SetValue("TALKEDSMUGGLER", false);
+		GameMan.main.conditionals.SetValue("FINISHEDSMUGGLER", false);
 
 		BreadRoomSounds.GetComponent<AudioSource>().Play();
 	}
