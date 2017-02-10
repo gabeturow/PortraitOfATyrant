@@ -9,6 +9,7 @@ public class CharacterAnimation : MonoBehaviour {
 	public GameObject playerObject;
 	public bool tempFirst=false;
 	public bool introLevel1=false;
+	public bool HandsUpBool=false;
 
 	public enum Face{
 		Front, Left, Right, Back}
@@ -16,7 +17,7 @@ public class CharacterAnimation : MonoBehaviour {
 
 	public enum PlayingAnim{
 		Idle, Walk, Talk, Laugh, PickUp_Hi, PickUp_Med, PickUp_Lo, Inventory, InventoryUse,
-		ClimbUp, PlayCards, TightRope, Captain, LightLamp, TurnLeft, TurnAway, Crouch, DropCeiling, DropBegin}
+		ClimbUp, PlayCards, TightRope, Captain, LightLamp, TurnLeft, TurnAway, Crouch, DropCeiling, DropBegin, HandsUp}
 	public PlayingAnim action;
 
 	public bool stairUp, stairDown;
@@ -62,6 +63,11 @@ public class CharacterAnimation : MonoBehaviour {
 			currentAnimator.SetBool("DropCeiling", true);
 		}
 	
+		/*if(HandsUpBool){
+			currentAnimator.SetBool("HandsUp", true);
+			facing=Face.Left;
+		}*/
+			
 		switch (facing){
 		//IF FACING THE FRONT
 		case Face.Front:
@@ -164,6 +170,7 @@ public class CharacterAnimation : MonoBehaviour {
 			currentAnimator.SetBool("Walking", false);
 
 			if (facing == Face.Left || facing == Face.Right){
+				currentAnimator.SetBool("HandsUp", false);
 				currentAnimator.SetBool("Talking", false);
 				currentAnimator.SetBool("Laughing", false);
 				currentAnimator.SetInteger("PickUp", 0);
@@ -171,6 +178,19 @@ public class CharacterAnimation : MonoBehaviour {
 				currentAnimator.SetBool("TurnLeft", false);
 			} 
 			break;
+
+		case PlayingAnim.HandsUp:
+			currentAnimator.SetBool("Walking", false);
+
+			if (facing == Face.Left || facing == Face.Right){
+				currentAnimator.SetBool("HandsUp", true);
+				currentAnimator.SetBool("Laughing", false);
+				currentAnimator.SetInteger("PickUp", 0);
+				currentAnimator.SetBool("TightRope", false);
+				currentAnimator.SetBool("TurnLeft", false);
+			} 
+			break;
+
 		case PlayingAnim.Talk:
 			currentAnimator.SetBool("Walking", false);
 			if (facing == Face.Left || facing == Face.Right){
@@ -183,6 +203,7 @@ public class CharacterAnimation : MonoBehaviour {
 		case PlayingAnim.Walk:
 			currentAnimator.SetBool("Walking", true);
 			if (facing == Face.Left || facing == Face.Right){
+				currentAnimator.SetBool("HandsUp", false);
 				currentAnimator.SetBool("Talking", false);
 				currentAnimator.SetBool("Laughing", false);
 				currentAnimator.SetInteger("PickUp", 0);

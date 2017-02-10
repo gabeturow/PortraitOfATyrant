@@ -9,6 +9,8 @@ public class AnimationModule : InteractionModule {
 	private float delayTime=0;
 	[SerializeField]
 	public string whichTrigger="";
+	[SerializeField]
+	public bool turnLeft;
 
 
 	[SerializeField]
@@ -20,6 +22,7 @@ public class AnimationModule : InteractionModule {
 			animator.SetTrigger(whichTrigger);
 		}
 	}
+		
 	public override void OnInteract ()
 	{
 		if (animationToPlay != ""){
@@ -27,6 +30,12 @@ public class AnimationModule : InteractionModule {
 			Invoke("PlayAnimation", delayTime);
 
 
+		}
+		//TurnLeft
+		CharacterAnimation characterNew;
+		if(turnLeft){
+			characterNew = DialogueViewer.main.characterOne.GetComponent<CharacterAnimation>();
+			characterNew.TurnCharacterLeft(true);
 		}
 	}
 

@@ -15,6 +15,7 @@ public class PickupModule : InteractionModule {
 		}
 	}
 
+
 	private static HashSet<string> _pickups;
 	private static HashSet<string> pickups{
 		get { if (_pickups == null) _pickups = new HashSet<string>();
@@ -23,6 +24,16 @@ public class PickupModule : InteractionModule {
 	}
 
 	public InventoryObject inventoryObj;
+	public bool turnLeft;
+
+
+	void TurnLeft(){
+		CharacterAnimation characterNew;
+		if(turnLeft){
+			characterNew = DialogueViewer.main.characterOne.GetComponent<CharacterAnimation>();
+			characterNew.TurnCharacterLeft(true);
+		}
+	}
 
 	void Awake(){
 		if (pickups.Contains(this.Identifier)){
@@ -32,12 +43,14 @@ public class PickupModule : InteractionModule {
 
 	public override void OnInteract(){
 
+		TurnLeft();
+
 		if (pickups.Contains(this.Identifier)){
 			Destroy(this.gameObject);
 		}
 
 		if (inventoryObj != null){
-			UIMan.bigItemViewer.Show(inventoryObj.inventorySprite, AddObjectToInventory);
+			UIMan.itemInspector.Show(inventoryObj.inventorySprite, inventoryObj.longDescription, AddObjectToInventory);
 		}
 	}
 

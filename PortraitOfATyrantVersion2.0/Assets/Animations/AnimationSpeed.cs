@@ -28,7 +28,9 @@ public class AnimationSpeed : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (type == ObjType.Character){
+			if(animator!=null){
 			animator = characterAnimationScript.currentAnimator;
+			}
 		}
 
 		animator.speed = animationSpeed;
