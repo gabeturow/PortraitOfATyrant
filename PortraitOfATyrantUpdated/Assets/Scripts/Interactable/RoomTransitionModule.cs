@@ -23,7 +23,7 @@ public class RoomTransitionModule : InteractionModule {
 		if (connectedRoom == null) {
 			Debug.Log("No connected room! Assign it in the inspector.");
 		}
-		RoomMan.main.LoadRoom(connectedRoom, doorway);
+		RoomMan.main.LoadRoom(connectedRoom.gameObject.name, doorway);
 
 	}
 	

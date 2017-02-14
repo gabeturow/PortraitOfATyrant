@@ -11,7 +11,7 @@ public class RoomTransitionTester : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		RoomMan.main.LoadRoom(r, beginDoor);
+		RoomMan.main.LoadRoom(r.gameObject.name, beginDoor);
 	}
 	
 	// Update is called once per frame

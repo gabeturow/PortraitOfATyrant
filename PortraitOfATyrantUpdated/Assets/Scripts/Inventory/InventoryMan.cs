@@ -52,6 +52,10 @@ public class InventoryMan : MonoBehaviour {
 
 	}
 
+	public InventoryObject[] GetItems(){
+		return items.ToArray();
+	}
+
 	public InventoryObject[] GetGrievances(){
 		return items.Where(
 			i=>{return i.type == InventoryObject.ObjectType.Grievance;}

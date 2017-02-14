@@ -20,7 +20,7 @@ public class ConditionalController : MonoBehaviour {
 
 	DialogueViewer dialogueViewer;
 	// Use this for initialization
-	void Start(){
+	void Awake(){
 		//Variables for Chapter 1
 		GameMan.main.conditionals.SetValue("BREADROOMSOUNDS", false);
 		GameMan.main.conditionals.SetValue("DOORLEFTUSED", false);
