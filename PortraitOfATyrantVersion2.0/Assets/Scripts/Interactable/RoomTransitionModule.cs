@@ -5,6 +5,7 @@ public class RoomTransitionModule : InteractionModule {
 
 	public Room connectedRoom;
 	public string doorway;
+	public bool shouldTurnLeft;
 
 	public float delay = 1f;
 
@@ -24,14 +25,18 @@ public class RoomTransitionModule : InteractionModule {
 			Debug.Log("No connected room! Assign it in the inspector.");
 		}
 		RoomMan.main.LoadRoom(connectedRoom, doorway);
-
+		if(shouldTurnLeft){
+			PickupModule.main.turnLeft=true;
+			PickupModule.main.TurnLeft();
+		}
 	}
 	
 
 
 	public override void OnInteract ()
 	{
-	
+
+
 		StartCoroutine(WaitToTransition());
 
 

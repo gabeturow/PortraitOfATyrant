@@ -27,17 +27,14 @@ public class DialogueTree : MonoBehaviour {
 		current = root;
 		current.Init();
 	}
-
-	void Update(){
-
-	}
-
+		
 	public bool IsComplete{
 		get{ return (current == null || root == null || (current.nextNode == null && current.IsComplete)); }
 	}
 
 	public DialogueLine CurrentMessage{
-		get{ return current.CurrentMessage; }
+		get{ return current.CurrentMessage;} 
+
 	}
 
 	public bool IsBlocked = false;

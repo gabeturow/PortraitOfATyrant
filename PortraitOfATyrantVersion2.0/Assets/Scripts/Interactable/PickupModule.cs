@@ -27,7 +27,7 @@ public class PickupModule : InteractionModule {
 	public bool turnLeft;
 
 
-	void TurnLeft(){
+	public void TurnLeft(){
 		CharacterAnimation characterNew;
 		if(turnLeft){
 			characterNew = DialogueViewer.main.characterOne.GetComponent<CharacterAnimation>();

@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Text;
-
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
+
 
 [System.Serializable]
 public struct DialogueLine{
@@ -15,6 +13,7 @@ public struct DialogueLine{
 
 public class DialogueNode : MonoBehaviour {
 
+	public string currentLineNow;
 	public static DialogueNode main;
 	public DialogueCharacter character;
 	public DialogueNode nextNode;
@@ -48,9 +47,11 @@ public class DialogueNode : MonoBehaviour {
 		ReceiveItem(inventoryObj);
 		this.currentMessageIndex = -1;
 		//GameMan.main.conditionals.SetValue(condition, valueToSet);
+
 	}
 
 	public bool CanAdvance(){
+		
 		if (onEnter != null) {
 			for (int i = 0; i < onEnter.Length; i++) {
 				if (!onEnter[i].IsFinished())
@@ -72,7 +73,9 @@ public class DialogueNode : MonoBehaviour {
 
 	public virtual DialogueLine CurrentMessage{ 
 		
-		get{ return lines[currentMessageIndex]; } 
+
+		get{ return lines[currentMessageIndex];
+		} 
 	}
 
 	public virtual bool IsComplete{ 
@@ -135,8 +138,12 @@ public class DialogueNode : MonoBehaviour {
 		sb.AppendLine("<color=grey>" + this.gameObject.name + "</color>\n");
 		for(int i = 0; i < lines.Length; i++){
 			sb.AppendLine(lines[i].text);
+
+			//WriteHere.main.writeToString+=lines[i].text;
+
 		}
 		return sb.ToString();
+
 	}
 #endif
 }

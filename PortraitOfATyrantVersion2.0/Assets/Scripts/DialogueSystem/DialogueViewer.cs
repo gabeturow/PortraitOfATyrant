@@ -42,6 +42,10 @@ public class DialogueViewer : MonoBehaviour {
 	}
 
 	public void PlayDialogue(DialogueTree dialogue){
+		//FADE ANY OPEN TOAST MESSAGES////
+		Toaster.main.Hide();
+		////////////////////////////////
+
 		var d = ((GameObject)Instantiate(dialogue.gameObject)).GetComponent<DialogueTree>();
 		d.Init();
 		this.currentDialogue = d;
@@ -120,6 +124,7 @@ public class DialogueViewer : MonoBehaviour {
 	}
 
 	void DrawCurrentMessage(){
+		
 		if (currentDialogue.IsBlocked){
 			faderNew.displaying =true;
 			return;

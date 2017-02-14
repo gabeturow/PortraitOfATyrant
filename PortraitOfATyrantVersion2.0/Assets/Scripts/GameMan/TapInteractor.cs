@@ -31,7 +31,7 @@ public class TapInteractor : MonoBehaviour {
 	}
 
 	void MovementInteractionUpdate(){
-		if (DialogueViewer.main.currentDialogue != null || UIMan.main.IsPanelActive()) return;
+		if (DialogueViewer.main.currentDialogue != null || UIMan.main.IsPanelActive() || GameMan.main.conditionals.GetValue("CUTSCENERUNNING")) return;
 
 		queuedInteraction = null;
 		Vector3 mouseRayPos = Input.mousePosition;

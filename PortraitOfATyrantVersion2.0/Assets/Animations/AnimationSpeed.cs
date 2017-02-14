@@ -32,8 +32,8 @@ public class AnimationSpeed : MonoBehaviour {
 			animator = characterAnimationScript.currentAnimator;
 			}
 		}
-
+		if(animator!=null){
 		animator.speed = animationSpeed;
-
+		}
 	}
 }

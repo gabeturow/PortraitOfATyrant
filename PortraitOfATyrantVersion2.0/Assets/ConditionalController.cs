@@ -18,7 +18,7 @@ public class ConditionalController : MonoBehaviour {
 	public GameObject cookWhistling;
 	public GameObject startMenu;
 	public GameObject OldManTrans;
-
+	public GameObject turnOnBurningScene;
 
 	DialogueViewer dialogueViewer;
 	// Use this for initialization
@@ -66,13 +66,18 @@ public class ConditionalController : MonoBehaviour {
 		GameMan.main.conditionals.SetValue("FINISHEDCOOK", false);
 		GameMan.main.conditionals.SetValue("TALKEDSMUGGLER", false);
 		GameMan.main.conditionals.SetValue("FINISHEDSMUGGLER", false);
+		GameMan.main.conditionals.SetValue("CUTSCENERUNNING", true);
+		GameMan.main.conditionals.SetValue("BURNINGSCENE",false);
 
 		BreadRoomSounds.GetComponent<AudioSource>().Play();
 	}
 
 
 	void Update(){
-		
+
+		if(GameMan.main.conditionals.GetValue("BURNINGSCENE")){
+			turnOnBurningScene.SetActive(true);
+		}
 		//Turn on Dialogue Interfaces
 		if(GameMan.main.conditionals.GetValue("RIGHTS")){	
 			GameMan.main.conditionals.SetValue("GRIEVANCE", false);
