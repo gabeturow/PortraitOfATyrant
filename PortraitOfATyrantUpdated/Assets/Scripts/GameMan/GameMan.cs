@@ -25,11 +25,27 @@ public class GameMan : MonoBehaviour {
 	void Start () {
 		TapInteractor.main.characterToMove = character.motor;
 		CameraController2D.main.Track(character.gameObject);
+
+		var saveFile = TryLoadSave() ?? GetNewSaveFile();
+		RoomMan.main.LoadRoom(saveFile.player.roomName, saveFile.player.doorName);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+
+	SaveFile TryLoadSave(){
+		var saveFile = SaveMan.TryLoad();
+		if (saveFile == null) return null;
+		var restored = SaveMan.RestoreSave(saveFile);
+		if (!restored) return null;
+		return saveFile;
 	}
+
+
+	SaveFile GetNewSaveFile(){
+		var saveFile = SaveMan.CreateSaveFile();
+		saveFile.player.roomName = "CaptainsQuarters";
+		saveFile.player.doorName = "RightCaptainDoor";
+		return saveFile;
+	}
+
 
 }

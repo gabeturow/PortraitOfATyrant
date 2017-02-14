@@ -4,15 +4,17 @@ using System.Collections;
 public class RoomMan : MonoBehaviour {
 	public static RoomMan main;
 
-	public Room current;
+	public Room current { get; private set; }
+
+	public string lastRoom { get; private set; }
+	public string lastDoor { get; private set; }
 
 
 	void Awake(){
 		main = this;
 	}
 
-
-	public void LoadRoom(Room r, string doorwayName){
+	public void LoadRoom(string roomName, string doorwayName){
 		//hide toast
 		Toaster.main.Hide();
 
@@ -22,7 +24,8 @@ public class RoomMan : MonoBehaviour {
 			if (current != null){
 				Destroy(current.gameObject);
 			}
-			GameObject newRoom = Instantiate(r.gameObject) as GameObject;
+			GameObject newRoom = PrefabManager.Instantiate(roomName);
+			Room r = newRoom.GetComponent<Room>();
 			newRoom.transform.position = Vector3.zero;
 			current = newRoom.GetComponent<Room>();
 			Transform entryway = newRoom.transform.FindDeepChild(doorwayName);
@@ -41,6 +44,12 @@ public class RoomMan : MonoBehaviour {
 				CameraController2D.main.min = rPos + r.CameraMin;
 				CameraController2D.main.max = rPos + r.CameraMax;
 			}
+
+
+
+			lastDoor = doorwayName;
+			lastRoom = roomName;
+			SaveMan.SaveToFile();
 		},
 			()=>{
 				TapInteractor.main.enabled = true;
