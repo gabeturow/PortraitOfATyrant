@@ -20,7 +20,7 @@ public class WriteHere : MonoBehaviour {
 	void Start(){
 		Writing();
 	}
-		
+
 
 	void RunThroughNodeListUntilHitBlankNode(DialogueNode ThisNodeLine){
 		numberofLines=ThisNodeLine.lines.Length;
@@ -41,7 +41,7 @@ public class WriteHere : MonoBehaviour {
 	int whichChoice=0;
 	int whichChoiceNew=0;
 	public void Writing(){
-		
+
 
 		//Find the root node
 		numberofLines=GetComponent<DialogueTree>().root.lines.Length;
@@ -53,26 +53,26 @@ public class WriteHere : MonoBehaviour {
 		currentNode=GetComponent<DialogueTree>().root.nextNode;
 
 		while(currentNode!=null){
-			
+
 			RunThroughNodeListUntilHitBlankNode(currentNode);
 
 			//Find next node
 			currentNode=currentNode.nextNode;
 
-		
-				if(currentNode.GetComponent<DialogueChoiceNode>()!=null){
-					DialogueNode choiceNodeTrans=currentNode;
-				 
-					while(whichChoice<4){
+
+			if(currentNode.GetComponent<DialogueChoiceNode>()!=null){
+				DialogueNode choiceNodeTrans=currentNode;
+
+				while(whichChoice<4){
 					writeThisText +="<b><br><br><u>Grievance #</b> "+(whichChoice+1f)+"</u>/";
-						currentNode=choiceNodeTrans.GetComponent<DialogueChoiceNode>().choices[whichChoice].nodeChoice;
+					currentNode=choiceNodeTrans.GetComponent<DialogueChoiceNode>().choices[whichChoice].nodeChoice;
 					writeThisText +="<i>"+choiceNodeTrans.GetComponent<DialogueChoiceNode>().choices[whichChoice].responseText+"</i>/";
 					writeThisText +=""+choiceNodeTrans.GetComponent<DialogueChoiceNode>().choices[whichChoice].grievanceImage.name+"/";
 					writeThisText +=""+choiceNodeTrans.GetComponent<DialogueChoiceNode>().choices[whichChoice].label+"/";
 
 
-						while(currentNode!=null){
-							RunThroughNodeListUntilHitBlankNode(currentNode);
+					while(currentNode!=null){
+						RunThroughNodeListUntilHitBlankNode(currentNode);
 						currentNode=currentNode.nextNode;
 						if(currentNode!=null && currentNode.character!=null){
 							if(currentNode.character.name=="Rights"){
@@ -94,10 +94,10 @@ public class WriteHere : MonoBehaviour {
 						}
 					}	
 					whichChoice++;
-					}	
+				}	
 			}
 		}
 	}
 }
-	
+
 
