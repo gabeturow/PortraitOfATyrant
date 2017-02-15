@@ -64,11 +64,10 @@ public class WriteHere : MonoBehaviour {
 				DialogueNode choiceNodeTrans=currentNode;
 
 				while(whichChoice<4){
-					writeThisText +="<b><br><br><u>Grievance #</b> "+(whichChoice+1f)+"</u>/";
+					writeThisText +="<b><br><br><u>Grievance #</b> "+(whichChoice+1f)+"</u><br>";
 					currentNode=choiceNodeTrans.GetComponent<DialogueChoiceNode>().choices[whichChoice].nodeChoice;
 					writeThisText +="<i>"+choiceNodeTrans.GetComponent<DialogueChoiceNode>().choices[whichChoice].responseText+"</i>/";
-					writeThisText +=""+choiceNodeTrans.GetComponent<DialogueChoiceNode>().choices[whichChoice].grievanceImage.name+"/";
-					writeThisText +=""+choiceNodeTrans.GetComponent<DialogueChoiceNode>().choices[whichChoice].label+"/";
+					writeThisText +=""+choiceNodeTrans.GetComponent<DialogueChoiceNode>().choices[whichChoice].label+"";
 
 
 					while(currentNode!=null){
@@ -78,11 +77,10 @@ public class WriteHere : MonoBehaviour {
 							if(currentNode.character.name=="Rights"){
 								choiceNodeTransNew=currentNode;
 								while(whichChoiceNew<4){
-									writeThisText +="<b><br><br><u>Right #</b> "+(whichChoiceNew+1f)+"</u>/";
+									writeThisText +="<b><br><br><u>Right #</b> "+(whichChoiceNew+1f)+"</u><br>";
 									currentNodeNew=choiceNodeTransNew.GetComponent<DialogueChoiceNode>().choices[whichChoiceNew].nodeChoice;
 									writeThisText +="<i>"+choiceNodeTransNew.GetComponent<DialogueChoiceNode>().choices[whichChoiceNew].responseText+"</i>/";
-									writeThisText +=""+choiceNodeTransNew.GetComponent<DialogueChoiceNode>().rightsImage.name+"/";
-									writeThisText +=""+choiceNodeTransNew.GetComponent<DialogueChoiceNode>().rightsLabel+"/";
+									writeThisText +=""+choiceNodeTransNew.GetComponent<DialogueChoiceNode>().rightsLabel+"";
 
 									while(currentNodeNew!=null){
 										RunThroughNodeListUntilHitBlankNode(currentNodeNew);

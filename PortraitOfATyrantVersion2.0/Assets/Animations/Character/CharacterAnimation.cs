@@ -117,7 +117,7 @@ public class CharacterAnimation : MonoBehaviour {
 	IEnumerator StopAnim(){
 		Side.transform.localScale = new Vector3(0, 0, 0);
 		currentAnimator.SetBool("ClimbUp", true);
-		yield return new WaitForSeconds(7);
+		yield return new WaitForSeconds(3);
 		facing=Face.Right;
 		action = PlayingAnim.Walk;
 		currentAnimator.SetBool("ClimbUp", false);

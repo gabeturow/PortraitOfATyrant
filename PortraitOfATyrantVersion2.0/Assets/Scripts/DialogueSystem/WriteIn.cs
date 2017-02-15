@@ -47,8 +47,8 @@ public class WriteIn : MonoBehaviour {
 	public Animator upperDeckAnimator;
 
 
-	void Start()
-	{
+	void Start(){
+		
 		theWholeFileAsOneLongString = dictionaryTextFile.text;
 
 		//Split it into Lines
@@ -56,40 +56,46 @@ public class WriteIn : MonoBehaviour {
 
 		CharacterFinder();
 		//Iterate through each Lines in the eachLine List
+
+		GetComponent<DialogueTree>().root=startNode.GetComponent<DialogueNode>();
+
+
+
 	}
 
 	void DoChoiceNode(int choiceNumber){
 		newChoiceInst=Instantiate<GameObject>(choiceNodePrefab);
 		childPrefab=newChoiceInst;
 		childPrefab.transform.SetParent(parentPrefab.transform);
-
-		//}
 	}
 
 	void ProsperityTranslate(){
 		for(int x=0;x<substrings.Length;x++){
-			if(substrings.Length>1){
-				newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].responseText=substrings[0];
-				newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].label=substrings[1];
-			if(substrings[x]=="PROSPERITY"){
-					newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].grievanceImage=prosperity;
+			if(newChoiceInst.GetComponent<DialogueChoiceNode>().choices.Length>choiceNumberGrievance){
+				if(substrings.Length>1){
+					newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].responseText=substrings[0];
+					newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].label=substrings[1];
+					if(substrings[x]=="PROSPERITY"){
+							newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].grievanceImage=prosperity;
+					}
+					if(substrings[x]=="LIBERTY"){
+							newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].grievanceImage=liberty;
+					}
+					if(substrings[x]=="PEACE"){
+							newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].grievanceImage=peace;
+					}
+					if(substrings[x]=="JUSTICE"){
+							newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].grievanceImage=justice;
+					}
+				}
 			}
-			if(substrings[x]=="LIBERTY"){
-					newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].grievanceImage=liberty;
-			}
-			if(substrings[x]=="PEACE"){
-					newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].grievanceImage=peace;
-			}
-			if(substrings[x]=="JUSTICE"){
-					newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].grievanceImage=justice;
-			}
-		}
 		}
 
 	}
 
 	void ProsperityTranslateRights(){
 		for(int x=0;x<substrings.Length;x++){
+			if(newChoiceRightInst.GetComponent<DialogueChoiceNode>().choices.Length>choiceNumberRight){
 			if(substrings.Length>1){
 				newChoiceRightInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberRight].responseText=substrings[0];
 				newChoiceRightInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberRight].label=substrings[1];
@@ -106,6 +112,7 @@ public class WriteIn : MonoBehaviour {
 				if(substrings[x]=="JUSTICE"){
 					newChoiceRightInst.GetComponent<DialogueChoiceNode>().rightsImage=justice;
 				}
+			}
 			}
 		}
 
@@ -169,19 +176,21 @@ public class WriteIn : MonoBehaviour {
 			}
 
 			if(eachLine[lineCounter]=="Grievance # 2" || eachLine[lineCounter]=="Grievance # 3" || eachLine[lineCounter]=="Grievance # 4"){
+				
 				grievanceOn=false;
 				choiceNumberGrievance++;
 				grievanceTwoThroughFourOn=true;
 				CreatePrefab(BrianaPrefab);
-				if(eachLine[lineCounter]=="Grievance # 4"){
-					grievanceTwoThroughFourOn=false;
-				}
+
 			}
 
 			if(eachLine[lineCounter]=="Right # 2" || eachLine[lineCounter]=="Right # 3" || eachLine[lineCounter]=="Right # 4"){
 				rightOn=false;
-				choiceNumberRight++;
+				grievanceOn=false;
+				grievanceTwoThroughFourOn=false;
 				rightTwoThroughFourOn=true;
+				choiceNumberRight++;
+
 				CreatePrefab(BrianaPrefab);
 				if(eachLine[lineCounter]=="Right # 4"){
 					rightTwoThroughFourOn=false;
@@ -196,6 +205,7 @@ public class WriteIn : MonoBehaviour {
 
 
 	void CreatePrefab(DialogueCharacter whichCharacter){
+		
 		if(substrings[0]=="CON"){
 			for(int x=0;x<substrings.Length;x++){
 				
@@ -219,14 +229,26 @@ public class WriteIn : MonoBehaviour {
 		}
 		childPrefab=Instantiate<GameObject>(prefab);
 		childPrefab.transform.SetParent(parentPrefab.transform);
-		if(grievanceOn || grievanceTwoThroughFourOn){
-			newChoiceInst.transform.SetParent(parentPrefab.transform);
-			newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].nodeChoice=childPrefab.GetComponent<DialogueNode>();
 
+		if(grievanceOn || grievanceTwoThroughFourOn){
+			
+			newChoiceInst.transform.SetParent(parentPrefab.transform);
+			newChoiceInst.GetComponent<DialogueChoiceNode>().conditionalState="GRIEVANCE";
+			newChoiceInst.GetComponent<DialogueChoiceNode>().conditionalBool=true;
+			if(newChoiceInst.GetComponent<DialogueChoiceNode>().choices.Length>choiceNumberGrievance){
+			newChoiceInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberGrievance].nodeChoice=childPrefab.GetComponent<DialogueNode>();
+			}
+				if(eachLine[lineCounter]=="Grievance # 4"){
+				Debug.Log(grievanceTwoThroughFourOn);
+			}
+			
+				
 			//Set choice node as next node on previous node
 			parentPrefab.GetComponent<DialogueNode>().nextNode=newChoiceInst.GetComponent<DialogueNode>();
 
 		}else if(rightOn || rightTwoThroughFourOn){
+			newChoiceInst.GetComponent<DialogueChoiceNode>().conditionalState="RIGHTS";
+			newChoiceInst.GetComponent<DialogueChoiceNode>().conditionalBool=true;
 			newChoiceRightInst.transform.SetParent(parentPrefab.transform);
 			newChoiceRightInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberRight].nodeChoice=childPrefab.GetComponent<DialogueNode>();
 			parentPrefab.GetComponent<DialogueNode>().nextNode=newChoiceRightInst.GetComponent<DialogueNode>();
