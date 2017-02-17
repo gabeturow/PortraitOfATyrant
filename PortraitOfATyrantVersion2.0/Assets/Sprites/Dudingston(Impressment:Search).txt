@@ -1,0 +1,172 @@
+CAPTAIN DUDINGSTON
+Get back!I remind you, you are still my property!
+The King’s Letter of Marque gives me authority over you.
+
+SOUND EFFECT
+
+CON/ANIM/CapMad/Captain
+
+BRIANA
+No, sir!
+You should be ashamed. 
+You are a legalized pirate who relies almost entirely on forced labor.
+It would be one thing if you did your own dirty work, but instead you make us do it for you.
+Day in and day out you have:
+
+CON/SETBOOL/GRIEVANCE/true
+
+Grievance # 1
+Cut off our Trade with all parts of the world./PROSPERITY
+
+BRIANA
+You have cut off our trade with all parts of the world.
+
+CAPTAIN DUDINGSTON
+It's true I've done my best to cut of their shipping lanes, but I believe you were getting at something else...
+Something to do with why you find it so unjust to work for me...
+
+BRIANA
+Hmmmm.
+
+CHOICES
+
+
+Grievance # 2
+Constrained your fellow Citizens, taken Captive on the high Seas to bear Arms against their Country…/LIBERTY
+
+BRIANA
+You have constrained your fellow Citizens, taken Captive on the high Seas to bear Arms against their Country...
+To become the Executioners of their Friends and Brethren, or to Fall themselves by their Hands.
+
+CON/PLAYDEC/Declaration/1
+
+
+SOUND EFFECT
+VICTORY!
+
+CON/SETBOOL/GRIEVANCE/false
+
+CAPTAIN DUDINGSTON
+Well gosh, it sounds so dramatic when you put it that way.
+
+BRIANA
+Do not mock me! 
+I will use the momentum from your downfall to advocate for a new right...
+A right that guards against such cynical invasions of our liberty and property:
+
+CON/SETBOOL/RIGHTS/true
+
+Right # 1
+Right to trial by jury in civil cases./PROSPERITY
+
+BRIANA
+Right to trial by jury in civil cases.
+
+CAPTAIN DUDINGSTON
+And how would that protect you from trade violations and impressment? I'm confused...
+
+BRIANA
+Indeed! I misspoke. Excuse me.
+To stop your hostile assertion of dominance in our seas, we must cultivate a new defense:
+
+RIGHTS
+
+
+Right # 2
+No quartering of soldiers in one's house./PROSPERITY
+
+BRIANA
+You need a new right:
+No quartering of soldiers in one's house.
+
+CAPTAIN DUDINGSTON
+The housing for my soldiers is not your concern.
+I can already see why stationing them in your town might be intimidating for some people...
+
+BRIANA
+Indeed! I misspoke. Excuse me.
+To stop your hostile assertion of dominance in our seas, we must cultivate a new defense:
+
+RIGHTS
+
+
+Right # 3
+Freedom from unreasonable searches and seizures./PROSPERITY
+
+BRIANA
+The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures.
+
+CON/PLAYDEC/BillOfRights/0
+
+SOUND EFFECT
+VICTORY!
+
+CON/SETBOOL/RIGHTS/false
+
+CAPTAIN DUDINGSTON
+Blast it!
+As I listen to you, and watch these blokes light my ship on fire...
+I have to wonder if I've gone astray.
+But then again, if my work disturbed their slaving and endless profits, well, it was probably worth it. 
+The privateer's life's for me, it seems! 
+You, on the other hand, should now make haste to the front of the ship and save yourself...
+It is time that my dear Gaspée faces her maker...
+
+CON/ANIM/ArmDown/Captain/SETBOOL/FINISHEDCAPTAIN/true/
+
+END
+
+
+Right # 4
+Freedom from excessive bail, cruel and unusual punishments./PROSPERITY
+
+BRIANA
+Freedom from excessive bail, and cruel and unusual punishment. 
+
+CON/SETBOOL/RIGHTS/true
+
+CAPTAIN DUDINGSTON
+I don't see how that would help you with your current problems, my dear.
+You haven't been imprisoned or tried in court.
+
+BRIANA
+Indeed! I misspoke. Excuse me.
+To stop your hostile assertion of dominance in our seas, we must cultivate a new defense:
+
+RIGHTS
+
+
+Grievance # 3
+Deprived us in many cases, of the benefit of Trial by Jury./JUSTICE
+
+BRIANA
+You have deprived us in many cases, of the benefit of Trial by Jury.
+
+CAPTAIN DUDINGSTON
+That is false! I haven't denied anyone a fair trial! 
+Besides, everything I do is perfectly legal. Haven't you seen my letter of Marque?
+
+BRIANA
+Hmmmm.
+
+CHOICES
+
+
+Grievance # 4
+Quartered large bodies of armed troops among us./PEACE
+
+BRIANA
+You have quartered large bodies of armed troops among us.
+
+CAPTAIN DUDINGSTON
+I personally need my men out at sea, 
+but what did you expect of my fellow Brits, who defend the colonies from aggression at every turn? 
+That we'd sail back to England after every conflict, and just wait for something new to go wrong back here? 
+It's so much easier to use the buildings in your towns,
+and live off of your generous gifts of food and other supplies. 
+But you were talking about something else, weren't you?
+
+BRIANA
+Hmmmm.
+
+CHOICES

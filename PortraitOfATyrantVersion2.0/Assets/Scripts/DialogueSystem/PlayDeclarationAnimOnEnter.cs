@@ -3,10 +3,10 @@ using System.Collections;
 
 public class PlayDeclarationAnimOnEnter : OnEnterNode{
 
-	enum Document{Declaration, BillOfRights}
+	public enum Document{Declaration, BillOfRights}
 
 	[SerializeField]
-	Document document;
+	public Document document;
 
 	public int passageNumber;
 

@@ -12,7 +12,7 @@ public class MoveMouthWithAudio : MonoBehaviour {
 	void Start () {
 		audioSourceDialogue=DialogueViewer.main.audioSource;
 		spectrumAnalysis=DialogueViewer.main.GetComponent<SpectrumAnalysis>();
-
+		mouthToMove=this.transform;
 	}
 	
 	// Update is called once per frame

@@ -10,9 +10,9 @@ Grievance # 1
 Cut off our Trade with all parts of the world./PROSPERITY
 
 BRIANA
-Dudingston has cut off our trade with all parts of the world.
+Dudingston has cut off our trade with all parts of the world. 
 
-CON/PLAYDEC/Declaration/0 
+CON/PLAYDEC/Declaration/0
 
 THE AMERICAN
 It's true! And we won't stand for it anymore!
@@ -32,12 +32,13 @@ And now you may pass. God speed, child!
 
 CON/SETBOOL/GRIEVANCE/false
 
-CON/ANIM/AmericansGoCaptainRoom/AmericansRunAway/
+BRIANA
+
+CON/ANIM/AmericansGoCaptainRoom/AmericansRunAway/SETBOOL/GRIEVANCE/false
 
 END
 
 SOUND EFFECT
-
 
 Grievance # 2
 Constrained his fellow Citizens, taken Captive on the high Seas to bear Arms against their Country…/LIBERTY

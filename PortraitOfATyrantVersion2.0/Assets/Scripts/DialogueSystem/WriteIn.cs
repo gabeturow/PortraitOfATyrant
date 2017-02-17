@@ -43,8 +43,14 @@ public class WriteIn : MonoBehaviour {
 	public Sprite justice;
 	public Sprite peace;
 
+	public string newTag;
+
+	public AudioClip silence;
+
 
 	public Animator upperDeckAnimator;
+	public Animator AmericansRunAway;
+	public Animator CaptainNode;
 
 
 	void Start(){
@@ -132,11 +138,29 @@ public class WriteIn : MonoBehaviour {
 			delimiter = '/';
 			substrings = eachLine[lineCounter].Split(delimiter);
 
+			//SET TAG
+			newTag=substrings[0];
+
+			if(substrings[0]=="CON"){
+				CreatePrefab(CookPrefab);
+			}
+
+			if(substrings[0]=="END"){
+				CreatePrefab(BrianaPrefab);
+			}
+
+			if(substrings[0]=="CHOICES"){
+				CreatePrefab(BrianaPrefab);
+			}
+
+			if(substrings[0]=="RIGHTS"){
+				CreatePrefab(BrianaPrefab);
+			}
 
 			if(substrings[0]=="BRIANA"){
 				CreatePrefab(BrianaPrefab);
-
 			}
+				
 			if(eachLine[lineCounter]=="CAPTAIN DUDINGSTON"){
 
 				CreatePrefab(DudingstonPrefab);
@@ -149,10 +173,7 @@ public class WriteIn : MonoBehaviour {
 			if(eachLine[lineCounter]=="THE COOK"){
 				CreatePrefab(CookPrefab);
 			}
-
-			if(substrings[0]=="CON"){
-				CreatePrefab(CookPrefab);
-			}
+				
 
 			if(eachLine[lineCounter]=="SOUNDEFFECT"){
 				CreatePrefab(ActionPrefab);
@@ -178,6 +199,7 @@ public class WriteIn : MonoBehaviour {
 			if(eachLine[lineCounter]=="Grievance # 2" || eachLine[lineCounter]=="Grievance # 3" || eachLine[lineCounter]=="Grievance # 4"){
 				
 				grievanceOn=false;
+				rightOn=false;
 				choiceNumberGrievance++;
 				grievanceTwoThroughFourOn=true;
 				CreatePrefab(BrianaPrefab);
@@ -192,9 +214,6 @@ public class WriteIn : MonoBehaviour {
 				choiceNumberRight++;
 
 				CreatePrefab(BrianaPrefab);
-				if(eachLine[lineCounter]=="Right # 4"){
-					rightTwoThroughFourOn=false;
-				}
 			}
 
 
@@ -203,26 +222,45 @@ public class WriteIn : MonoBehaviour {
 	}
 
 
-
 	void CreatePrefab(DialogueCharacter whichCharacter){
-		
+
+		if(parentPrefab.ForceGetComponent<DialogueNode>().lines[0].text==""){
+			parentPrefab.ForceGetComponent<DialogueNode>().lines[0].audioClip=silence;
+		}
+
 		if(substrings[0]=="CON"){
 			for(int x=0;x<substrings.Length;x++){
 				
 				if(substrings[x]=="SETBOOL"){
-					childPrefab.ForceGetComponent<SetConditionOnEnter>().conditional=""+substrings[2];
-					childPrefab.ForceGetComponent<SetConditionOnEnter>().valueToSet=Convert.ToBoolean(""+substrings[3]);
+					childPrefab.ForceGetComponent<SetConditionOnEnter>().conditional=""+substrings[x+1];
+					childPrefab.ForceGetComponent<SetConditionOnEnter>().valueToSet=Convert.ToBoolean(""+substrings[x+2]);
 				}
 				if(substrings[x]=="ANIM"){
 
-					childPrefab.ForceGetComponent<AnimationDialogueOnEnter>().animationToPlay=""+substrings[2];
-					if(substrings[3]=="UpperDeckAnimator"){
+					childPrefab.ForceGetComponent<AnimationDialogueOnEnter>().animationToPlay=""+substrings[x+1];
+					if(substrings[x+2]=="UpperDeckAnimator"){
 						childPrefab.ForceGetComponent<AnimationDialogueOnEnter>().animator=upperDeckAnimator;
+					}
+					if(substrings[x+2]=="AmericansRunAway"){
+						childPrefab.ForceGetComponent<AnimationDialogueOnEnter>().animator=AmericansRunAway;
+					}
+					if(substrings[x+2]=="Captain"){
+						childPrefab.ForceGetComponent<AnimationDialogueOnEnter>().animator=CaptainNode;
 					}
 				}
 				if(substrings[x]=="ENABLE"){
 					childPrefab.ForceGetComponent<EnableObjectOnEnter>().thingToEnable=testThingToEnable;
-					childPrefab.ForceGetComponent<EnableObjectOnEnter>().onOrOff=Convert.ToBoolean(""+substrings[3]);
+					childPrefab.ForceGetComponent<EnableObjectOnEnter>().onOrOff=Convert.ToBoolean(""+substrings[x+2]);
+				}
+
+
+				if(substrings[x]=="PLAYDEC"){
+					childPrefab.ForceGetComponent<PlayDeclarationAnimOnEnter>().passageNumber=Convert.ToInt16(substrings[x+2]);
+					var animEnum=System.Enum.Parse(typeof(PlayDeclarationAnimOnEnter.Document), ""+substrings[x+1], true);
+					childPrefab.ForceGetComponent<PlayDeclarationAnimOnEnter>().document=(PlayDeclarationAnimOnEnter.Document)animEnum;
+						
+						//parse the string into the animation enum
+						
 				}
 
 			}
@@ -247,18 +285,32 @@ public class WriteIn : MonoBehaviour {
 			parentPrefab.GetComponent<DialogueNode>().nextNode=newChoiceInst.GetComponent<DialogueNode>();
 
 		}else if(rightOn || rightTwoThroughFourOn){
-			newChoiceInst.GetComponent<DialogueChoiceNode>().conditionalState="RIGHTS";
-			newChoiceInst.GetComponent<DialogueChoiceNode>().conditionalBool=true;
-			newChoiceRightInst.transform.SetParent(parentPrefab.transform);
+			newChoiceRightInst.GetComponent<DialogueChoiceNode>().conditionalState="RIGHTS";
+			newChoiceRightInst.GetComponent<DialogueChoiceNode>().conditionalBool=true;
+			//newChoiceRightInst.transform.SetParent(parentPrefab.transform);
+			if(newChoiceRightInst.GetComponent<DialogueChoiceNode>().choices.Length>choiceNumberRight){
 			newChoiceRightInst.GetComponent<DialogueChoiceNode>().choices[choiceNumberRight].nodeChoice=childPrefab.GetComponent<DialogueNode>();
+			}
 			parentPrefab.GetComponent<DialogueNode>().nextNode=newChoiceRightInst.GetComponent<DialogueNode>();
 		}
 		else{
-			parentPrefab.GetComponent<DialogueNode>().nextNode=childPrefab.GetComponent<DialogueNode>();
+			if(newTag=="END"){
+				parentPrefab.GetComponent<DialogueNode>().nextNode=null;
+			}
+			if(newTag=="CHOICES"){
+				parentPrefab.GetComponent<DialogueNode>().nextNode=newChoiceInst.GetComponent<DialogueChoiceNode>();
+			}
+			if(newTag=="RIGHTS"){
+				parentPrefab.GetComponent<DialogueNode>().nextNode=newChoiceRightInst.GetComponent<DialogueChoiceNode>();
+			}
+			if(newTag!="CHOICES" && newTag!="END" && newTag!="RIGHTS"){
+				parentPrefab.GetComponent<DialogueNode>().nextNode=childPrefab.GetComponent<DialogueNode>();
+			}
+				
 		}
 		parentPrefab=childPrefab;
 		childPrefab.ForceGetComponent<DialogueNode>().character=whichCharacter;
-		childPrefab.ForceGetComponent<DialogueNode>().lines= new DialogueLine[10];
+	//childPrefab.ForceGetComponent<DialogueNode>().lines= new DialogueLine[10];
 		lineCounter++;
 		substrings = eachLine[lineCounter].Split(delimiter);
 
@@ -284,11 +336,17 @@ public class WriteIn : MonoBehaviour {
 					ProsperityTranslate();
 		
 			}else if(rightOn || rightTwoThroughFourOn){
-			//	newChoiceRightInst.ForceGetComponent<DialogueChoiceNode>().choices[choiceNumberRight].responseText=eachLine[lineCounter];		
+			
 				ProsperityTranslateRights();
 			}else{
+				DialogueLine[] tempDiag=childPrefab.ForceGetComponent<DialogueNode>().lines;
+				childPrefab.ForceGetComponent<DialogueNode>().lines= new DialogueLine[linesTally+1];
+				for(int x=0;x<tempDiag.Length;x++){
+					childPrefab.ForceGetComponent<DialogueNode>().lines[x]=tempDiag[x];
+				}
 				childPrefab.ForceGetComponent<DialogueNode>().lines[linesTally].text=eachLine[lineCounter];
 			}
+
 			grievanceTwoThroughFourOn=false;
 			grievanceOn=false;
 			rightTwoThroughFourOn=false;
@@ -296,6 +354,8 @@ public class WriteIn : MonoBehaviour {
 
 			lineCounter++;
 			linesTally++;
+
+
 		}
 		return;
 	}
