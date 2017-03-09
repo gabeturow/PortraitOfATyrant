@@ -9,6 +9,7 @@ public class SetConditionOnEnter : OnEnterNode {
 	public bool valueToSet;
 
 	public override void OnEnter (DialogueNode node){
+		//GameMan.main.controller.ChangeTheMusic();
 		GameMan.main.conditionals.SetValue(conditional, valueToSet);
 	}
 }

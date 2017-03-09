@@ -14,6 +14,18 @@ public class AnimationDialogueOnEnter :OnEnterNode {
 				if (animator == null) animator = gameObject.ForceGetComponent<Animator>();
 				animator.Play(animationToPlay, 0, 0);
 			}
+
+		try{
+			//parse the string into the animation enum
+			var animEnum = System.Enum.Parse(typeof(CharacterAnimation.PlayingAnim), animationToPlay, true);
+			//play the animation
+			GameMan.main.character.render.anim.action = (CharacterAnimation.PlayingAnim)animEnum;
+
+		}
+		catch(System.ArgumentException e){
+			//failed to parse the string
+			Debug.LogError(e);
+		}
 		}
 
 

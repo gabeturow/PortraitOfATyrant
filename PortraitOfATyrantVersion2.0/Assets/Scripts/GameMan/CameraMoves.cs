@@ -8,12 +8,11 @@ public class CameraMoves : MonoBehaviour {
 		public float cameraX = 0f;
 		public float cameraY1 = 1.0f;
 		public float cameraZoom = 5f;
-		public GameObject cameraObj;
+		GameObject cameraObj;
 		public bool cameraGo=false;
 	public float howMuchMoveRight = .5f;
 	public bool ZoomCamera=true;
 	public bool moveright=false;
-	public DialogueViewer dialogueViewer;
 	public Vector3 cameraStartPointReceiver;
 
 
@@ -37,7 +36,7 @@ public class CameraMoves : MonoBehaviour {
 
 			if(moveright){
 				if(cameraGo){
-					if(cameraX<dialogueViewer.currentDialogue.howMuchRightMove){
+					if(cameraX<DialogueViewer.main.currentDialogue.howMuchRightMove){
 						cameraX+=.01f;
 					}
 				}else if(cameraX>0f){
@@ -53,7 +52,7 @@ public class CameraMoves : MonoBehaviour {
 
 		////	Move Y
 			if(cameraGo){
-				if(cameraY1<dialogueViewer.currentDialogue.howMuchMoveY){
+				if(cameraY1<DialogueViewer.main.currentDialogue.howMuchMoveY){
 					cameraY1+=.01f;
 				}
 			}else if(cameraY1>1f){
@@ -63,9 +62,9 @@ public class CameraMoves : MonoBehaviour {
 			float baseline=5f;
 			////  Move Z - Field of View
 			if(cameraGo){
-				if(cameraZoom<(baseline+.001) && cameraZoom>=dialogueViewer.currentDialogue.howMuchZoom){
+				if(cameraZoom<(baseline+.001) && cameraZoom>=DialogueViewer.main.currentDialogue.howMuchZoom){
 					cameraZoom-=.01f;
-				}else if(baseline<dialogueViewer.currentDialogue.howMuchZoom && cameraZoom<dialogueViewer.currentDialogue.howMuchZoom){
+				}else if(baseline<DialogueViewer.main.currentDialogue.howMuchZoom && cameraZoom<DialogueViewer.main.currentDialogue.howMuchZoom){
 					cameraZoom+=.01f;
 				}
 			}else{

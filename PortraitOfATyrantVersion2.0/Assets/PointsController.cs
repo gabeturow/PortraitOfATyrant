@@ -22,31 +22,31 @@ public class PointsController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(points<400){
-			denominator="400";
+		if(points<1000f){
+			denominator="1000";
 			rank="NOVICE";
-		}else if(800f>points && points>399f){
-			denominator="800";
+		}else if(2000f>points && points>999f){
+			denominator="2000";
 			rank="APPRENTICE";
 		}
-		else if(1200f>points && points>799f){
-			denominator="1200";
-			rank="JOURNEYMAN";
-		}
-		else if(1600f>points && points>1199f){
-			denominator="1600";
-			rank="ARTISAN";
-		}
-		else if(2000f>points && points>1599f){
-			denominator="2000";
+		else if(3500f>points && points>1999f){
+			denominator="3500";
 			rank="PROFESSIONAL";
 		}
-		else if(2400f>points && points>1999f){
-			denominator="2400";
+		else if(5500f>points && points>3499f){
+			denominator="5500";
+			rank="CRAFTSMAN";
+		}
+		else if(8000f>points && points>5499f){
+			denominator="8000";
+			rank="ARTISAN";
+		}
+		else if(10000f>points && points>7999f){
+			denominator="10000";
 			rank="EXPERT";
 		}
 
-		DisplayTextObject.text=""+rank+" "+points+"/"+denominator;
+		DisplayTextObject.text=""+rank+"\nXP: "+points+"/"+denominator;
 
 
 

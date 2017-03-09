@@ -18,9 +18,10 @@ public class DoDifferentThings : MonoBehaviour {
 		for(int conditionals=0; conditionals<setTheseBoolNames.Length; conditionals++){
 		GameMan.main.conditionals.SetValue(setTheseBoolNames[conditionals], setToTheseStates[conditionals]);
 		}
-
+		if(toTurnOn1.Length>0){
 		for(int x=0; x<toTurnOn1.Length;x++){
 		toTurnOn1[x].SetActive(true);
+		}
 		}
 
 				if(GameMan.main.conditionals.GetValue("STARTED")){

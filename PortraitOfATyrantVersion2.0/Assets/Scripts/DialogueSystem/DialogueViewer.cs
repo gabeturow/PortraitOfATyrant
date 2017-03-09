@@ -96,6 +96,19 @@ public class DialogueViewer : MonoBehaviour {
 		}
 	}
 
+	public void StopNow(){
+		audioSource.Stop();
+		if(currentDialogue!=null){
+			Destroy(currentDialogue.gameObject);
+		}
+		currentDialogue = null;
+		//Move the camera back to normal position when you end a dialogue
+		cameraObj.GetComponent<CameraMoves>().cameraGo=false;
+		fader.displaying =false;
+		faderNew.displaying =false;
+		choicePanel.isActive = false;
+	}
+
 	void TryAdvance(){
 		fader.displaying =false;
 		faderNew.displaying =false;
@@ -104,11 +117,7 @@ public class DialogueViewer : MonoBehaviour {
 			//alphaDamper.Target = 0f;
 			//alphaDamper.Speed = .1f;
 			//scaleSpring.velocity += Vector3.one * -2f;
-			audioSource.Stop();
-			Destroy(currentDialogue.gameObject);
-			currentDialogue = null;
-			//Move the camera back to normal position when you end a dialogue
-			cameraObj.GetComponent<CameraMoves>().cameraGo=false;
+			StopNow();
 		}
 		else{
 			faderNew.displaying =true;

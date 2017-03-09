@@ -3,6 +3,7 @@ using System.Collections;
 
 public class UIMan : MonoBehaviour {
 	public GameObject StartScreen;
+	public GameObject StartOverScreen;
 
 	public static UIMan main 							{ get; private set; }
 
@@ -15,7 +16,7 @@ public class UIMan : MonoBehaviour {
 
 
 	public bool IsPanelActive(){
-		return bigItemViewer.active || declaration.active || billOfRights.active || itemInspector.active;
+		return bigItemViewer.GetComponent<CanvasGroupFader>().displaying || declaration.GetComponent<CanvasGroupFader>().displaying || billOfRights.GetComponent<CanvasGroupFader>().displaying || itemInspector.GetComponent<CanvasGroupFader>().displaying || (StartOverScreen.activeSelf && StartOverScreen.GetComponent<CanvasGroupFader>().displaying);
 	}
 
 	void Awake(){

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: abd09db318e6d449bb0aa5e13bc9f929
-timeCreated: 1486572710
+timeCreated: 1487546383
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -17,6 +17,7 @@ TextureImporter:
     21300020: SmugglerSpriteSheet_10
     21300022: SmugglerSpriteSheet_11
     21300024: SmugglerSpriteSheet_12
+    21300026: SmugglerSpriteSheet_13
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -69,12 +70,12 @@ TextureImporter:
       name: SmugglerSpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 364
-        y: 1566
-        width: 363
-        height: 299
+        x: 325
+        y: 2050
+        width: 60
+        height: 64
       alignment: 9
-      pivot: {x: 0.5206647, y: 0.21149395}
+      pivot: {x: 0.75617015, y: 0.9643097}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -82,17 +83,30 @@ TextureImporter:
       name: SmugglerSpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 918
-        y: 1381
-        width: 157
-        height: 374
+        x: 364
+        y: 1566
+        width: 363
+        height: 299
       alignment: 9
-      pivot: {x: 0.47611153, y: 0.87104774}
+      pivot: {x: 0.5309966, y: 0.17386241}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: SmugglerSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 1381
+        width: 157
+        height: 374
+      alignment: 9
+      pivot: {x: 0.5, y: 0.80084944}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SmugglerSpriteSheet_3
       rect:
         serializedVersion: 2
         x: 39
@@ -105,7 +119,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: SmugglerSpriteSheet_3
+      name: SmugglerSpriteSheet_4
       rect:
         serializedVersion: 2
         x: 55
@@ -118,28 +132,15 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: SmugglerSpriteSheet_4
+      name: SmugglerSpriteSheet_5
       rect:
         serializedVersion: 2
         x: 73
         y: 1272
         width: 155
         height: 196
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: SmugglerSpriteSheet_5
-      rect:
-        serializedVersion: 2
-        x: 364
-        y: 1292
-        width: 269
-        height: 91
       alignment: 9
-      pivot: {x: 0.6812556, y: 0.7885085}
+      pivot: {x: 0.5241976, y: 0.4234582}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -147,17 +148,30 @@ TextureImporter:
       name: SmugglerSpriteSheet_6
       rect:
         serializedVersion: 2
-        x: 39
-        y: 612
-        width: 219
-        height: 562
+        x: 364
+        y: 1292
+        width: 269
+        height: 91
       alignment: 9
-      pivot: {x: 0.48287427, y: 0.8603768}
+      pivot: {x: 0.66731256, y: 0.829724}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: SmugglerSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 612
+        width: 219
+        height: 562
+      alignment: 9
+      pivot: {x: 0.482874, y: 0.9404603}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SmugglerSpriteSheet_8
       rect:
         serializedVersion: 2
         x: 258
@@ -170,28 +184,15 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: SmugglerSpriteSheet_8
+      name: SmugglerSpriteSheet_9
       rect:
         serializedVersion: 2
         x: 403
         y: 844
         width: 240
         height: 310
-      alignment: 9
-      pivot: {x: 0.5, y: 0.51209915}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: SmugglerSpriteSheet_9
-      rect:
-        serializedVersion: 2
-        x: 766
-        y: 892
-        width: 108
-        height: 178
-      alignment: 9
-      pivot: {x: 0.5, y: 0.8160613}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -199,12 +200,12 @@ TextureImporter:
       name: SmugglerSpriteSheet_10
       rect:
         serializedVersion: 2
-        x: 956
-        y: 844
-        width: 164
-        height: 353
+        x: 766
+        y: 892
+        width: 108
+        height: 178
       alignment: 9
-      pivot: {x: 0.6143479, y: 0.8612465}
+      pivot: {x: 0.53472733, y: 0.8792732}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -212,12 +213,12 @@ TextureImporter:
       name: SmugglerSpriteSheet_11
       rect:
         serializedVersion: 2
-        x: 407
-        y: 89
-        width: 246
-        height: 617
+        x: 956
+        y: 844
+        width: 164
+        height: 353
       alignment: 9
-      pivot: {x: 0.42376894, y: 0.90119755}
+      pivot: {x: 0.61434716, y: 0.88249606}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -225,12 +226,25 @@ TextureImporter:
       name: SmugglerSpriteSheet_12
       rect:
         serializedVersion: 2
+        x: 407
+        y: 89
+        width: 246
+        height: 617
+      alignment: 9
+      pivot: {x: 0.42376858, y: 0.9315913}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SmugglerSpriteSheet_13
+      rect:
+        serializedVersion: 2
         x: 766
         y: 126
         width: 304
         height: 582
       alignment: 9
-      pivot: {x: 0.5370128, y: 0.18422914}
+      pivot: {x: 0.5484882, y: 0.12913786}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

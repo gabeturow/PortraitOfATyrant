@@ -13,6 +13,7 @@ public class ItemInspector : PopUpViewer {
 	protected override void Awake(){
 		base.Awake();
 		scrollview = GetComponentInChildren<ScrollRect>();
+		scrollview.scrollSensitivity=2f;
 		contentText = scrollview.content.GetComponentInChildren<Text>();
 		this.itemImage = itemImg;
 	}

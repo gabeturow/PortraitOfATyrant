@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/*
 public class ChangeVolume : MonoBehaviour {
 
 	public AudioSource whichAudioSource;
@@ -27,4 +27,4 @@ public class ChangeVolume : MonoBehaviour {
 		ChangeVolumeUpperDecks();
 
 	}
-}
+}*/

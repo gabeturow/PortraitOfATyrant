@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: a54b65b009eae4a9fbf4831c3a717057
-timeCreated: 1486540199
+timeCreated: 1487459526
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: DudingstonSittingHalf_0
     21300002: DudingstonSittingHalf_1
+    21300004: DudingstonSittingHalf_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -58,12 +59,12 @@ TextureImporter:
       name: DudingstonSittingHalf_0
       rect:
         serializedVersion: 2
-        x: 28
-        y: 481
-        width: 210
-        height: 445
+        x: 13
+        y: 492
+        width: 20
+        height: 25
       alignment: 9
-      pivot: {x: 0.5413456, y: 0.025220618}
+      pivot: {x: 0.79758346, y: 0.76451784}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -71,12 +72,25 @@ TextureImporter:
       name: DudingstonSittingHalf_1
       rect:
         serializedVersion: 2
+        x: 28
+        y: 481
+        width: 210
+        height: 445
+      alignment: 9
+      pivot: {x: 0.5282798, y: 0.20639881}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: DudingstonSittingHalf_2
+      rect:
+        serializedVersion: 2
         x: 54
         y: 0
         width: 157
         height: 467
       alignment: 9
-      pivot: {x: 0.5553033, y: 0.9803012}
+      pivot: {x: 0.55673975, y: 0.98323905}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

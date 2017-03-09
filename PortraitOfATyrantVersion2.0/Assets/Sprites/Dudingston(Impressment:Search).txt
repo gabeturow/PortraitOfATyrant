@@ -1,10 +1,10 @@
 CAPTAIN DUDINGSTON
-Get back!I remind you, you are still my property!
+Get back! I remind you, you are still my property!
 The King’s Letter of Marque gives me authority over you.
 
 SOUND EFFECT
 
-CON/ANIM/CapMad/Captain
+CON/ANIM/CapMad/CaptainNode
 
 BRIANA
 No, sir!
@@ -75,8 +75,7 @@ RIGHTS
 Right # 2
 No quartering of soldiers in one's house./PROSPERITY
 
-BRIANA
-You need a new right:
+BRIANA 
 No quartering of soldiers in one's house.
 
 CAPTAIN DUDINGSTON
@@ -112,7 +111,7 @@ The privateer's life's for me, it seems!
 You, on the other hand, should now make haste to the front of the ship and save yourself...
 It is time that my dear Gaspée faces her maker...
 
-CON/ANIM/ArmDown/Captain/SETBOOL/FINISHEDCAPTAIN/true/
+CON/ANIM/ArmDown/CaptainNode/SETBOOL/FINISHEDCAPTAIN/true/
 
 END
 
@@ -132,6 +131,7 @@ You haven't been imprisoned or tried in court.
 BRIANA
 Indeed! I misspoke. Excuse me.
 To stop your hostile assertion of dominance in our seas, we must cultivate a new defense:
+To defend against people like you, we need:
 
 RIGHTS
 

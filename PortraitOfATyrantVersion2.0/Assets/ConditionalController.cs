@@ -4,21 +4,30 @@ using System.Collections;
 
 public class ConditionalController : MonoBehaviour {
 	public static ConditionalController main;
-	public GameObject BreadRoomSounds;
 	//public AudioSource backgroundMusic;
 	public AudioSource belowDeckTheme;
-	public AudioSource upperDeckTheme;
-	public AudioSource conflictTheme;
-	public AudioSource WhalerSinging;
 	public GameObject rightsPanel;
 	public GameObject dialoguePanel;
 	public GameObject grievancePanel;
 	public GameObject prompt;
 	public GameObject riddlePrompt;
-	public GameObject cookWhistling;
 	public GameObject startMenu;
 	public GameObject OldManTrans;
 	public GameObject turnOnBurningScene;
+	public GameObject endLevelOneCanvas;
+	public GameObject startButton;
+	public GameObject endCredits;
+	public GameObject startOver;
+	public GameObject BreadRoomExit;
+	public GameObject BreadRoomExitFromMagazine;
+
+	public GameObject score;
+	public GameObject homeButton;
+
+	public AudioClip belowDeckThemeClip;
+	public AudioClip upperDeckClip;
+	public AudioClip conflictClip;
+
 
 	DialogueViewer dialogueViewer;
 	// Use this for initialization
@@ -68,12 +77,61 @@ public class ConditionalController : MonoBehaviour {
 		GameMan.main.conditionals.SetValue("FINISHEDSMUGGLER", false);
 		GameMan.main.conditionals.SetValue("CUTSCENERUNNING", true);
 		GameMan.main.conditionals.SetValue("BURNINGSCENE",false);
+		GameMan.main.conditionals.SetValue("ENDGAME",false);
+		GameMan.main.conditionals.SetValue("GAMEOVER",false);
+		GameMan.main.conditionals.SetValue("MAGAZINE",false);
 
-		BreadRoomSounds.GetComponent<AudioSource>().Play();
+
+		}
+	AudioClip currentSongState;
+
+	public void ChangeTheMusic(){
+
+		if (GameMan.main.conditionals.GetValue("GRIEVANCE") || GameMan.main.conditionals.GetValue("RIGHTS") || GameMan.main.conditionals.GetValue("CONFLICT")){
+			belowDeckTheme.clip=conflictClip;
+		}else if(GameMan.main.conditionals.GetValue("BELOWDECK")){// && !GameMan.main.conditionals.GetValue("GRIEVANCE")){
+			belowDeckTheme.clip=belowDeckThemeClip;
+		}else if (GameMan.main.conditionals.GetValue("UPPERDECK")){
+			belowDeckTheme.clip=upperDeckClip;
+		}
+
+		if(currentSongState!=belowDeckTheme.clip){
+		belowDeckTheme.Play();
+		currentSongState=belowDeckTheme.clip;
+		}
 	}
 
-
 	void Update(){
+
+		if(RoomMan.main.current.name=="BreadRoom(Clone)" && !GameMan.main.conditionals.GetValue("MAGAZINE")){
+			BreadRoomExit.SetActive(true);
+		}else if(RoomMan.main.current.name=="BreadRoom(Clone)" && GameMan.main.conditionals.GetValue("MAGAZINE")){
+			BreadRoomExitFromMagazine.SetActive(true);
+				}else{
+				BreadRoomExit.SetActive(false);
+			BreadRoomExitFromMagazine.SetActive(false);
+				}
+
+		ChangeTheMusic();
+
+		if(GameMan.main.conditionals.GetValue("CUTSCENERUNNING")){
+			homeButton.SetActive(false);
+			score.SetActive(false);
+		}else{
+			homeButton.SetActive(true);
+			score.SetActive(true);
+		}
+
+		if(GameMan.main.conditionals.GetValue("GAMEOVER")){
+			startOver.SetActive(true);
+			//startOver.GetComponent<CanvasGroupFader>().displaying=true;
+		}
+
+		if(GameMan.main.conditionals.GetValue("ENDGAME")){
+			endLevelOneCanvas.GetComponent<CanvasGroupFader>().displaying=true;
+			endCredits.SetActive(true);
+			startButton.SetActive(false);
+		}
 
 		if(GameMan.main.conditionals.GetValue("BURNINGSCENE")){
 			turnOnBurningScene.SetActive(true);
@@ -120,44 +178,12 @@ public class ConditionalController : MonoBehaviour {
 				
 		
 		//THIS CONTROLS THE BREADROOM SOUNDS THAT COVER THE CAPTAINS QUARTERS AND THE MAGAZINE BUT TURN OFF FOR THE HOLD
-		if(GameMan.main.conditionals.GetValue("BREADROOMSOUNDS")){
-			BreadRoomSounds.SetActive(true);
-		}else{
-			BreadRoomSounds.SetActive(false);
-		}
+	
 
 	
 		//THIS CONTROLS THE THEME MUSIC
 
-		if(GameMan.main.conditionals.GetValue("BELOWDECK")){// && !GameMan.main.conditionals.GetValue("GRIEVANCE")){
-			belowDeckTheme.enabled=true;
-			//conflictTheme.enabled=false;
-			cookWhistling.SetActive(true);
-			upperDeckTheme.enabled=false;
-		}else if (GameMan.main.conditionals.GetValue("UPPERDECK")){
-			upperDeckTheme.enabled=true;
-			cookWhistling.SetActive(false);
-			//conflictTheme.enabled=false;
-			belowDeckTheme.enabled=false;
-		}else{
-			upperDeckTheme.enabled=false;
-			belowDeckTheme.enabled=false;
-		}
 
-
-
-		if (GameMan.main.conditionals.GetValue("GRIEVANCE")){
-
-			belowDeckTheme.enabled=false;
-			conflictTheme.enabled=true;
-			upperDeckTheme.enabled=false;
-		}else if(GameMan.main.conditionals.GetValue("CONFLICT")){
-				conflictTheme.enabled=true;
-				belowDeckTheme.enabled=false;
-				upperDeckTheme.enabled=false;
-		}else{
-			conflictTheme.enabled=false;
-		}
 
 
 		/*if(GameMan.main.conditionals.GetValue("STARTMENU")){
@@ -165,25 +191,14 @@ public class ConditionalController : MonoBehaviour {
 		}*/
 
 		//CONTROLS WHALER SINGING
-		if(GameMan.main.conditionals.GetValue("WHALERSINGING")){
-			WhalerSinging.enabled=true;
-		}else{
-			WhalerSinging.enabled=false;
-		}
 
-		if(GameMan.main.conditionals.GetValue("TALKED_ALREADY")){
-			BreadRoomSounds.SetActive(false);
-		}
 
+	
 		if(GameMan.main.conditionals.GetValue("OLDMAN")){
 			OldManTrans.SetActive(true);
 		}
 
 	
-		if(GameMan.main.conditionals.GetValue("COOKWHISTLEEND")){
-			cookWhistling.SetActive(false);
-		}else if(GameMan.main.conditionals.GetValue("COOKWHISTLEEND") && GameMan.main.conditionals.GetValue("UPPERDECK")==false ){
-			cookWhistling.SetActive(true);
-		}
+
 	}
 }

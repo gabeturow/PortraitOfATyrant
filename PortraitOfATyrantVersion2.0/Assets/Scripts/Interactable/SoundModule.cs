@@ -14,7 +14,7 @@ public class SoundModule : InteractionModule {
 		if (clipToPlay != null){
 			if (source == null) source = gameObject.ForceGetComponent<AudioSource>();
 		//	source.priority=1;
-			AudioSource.PlayClipAtPoint(clipToPlay, transform.position, .2f);
+			AudioSource.PlayClipAtPoint(clipToPlay, transform.position, .5f);
 
 			//return source;
 		}

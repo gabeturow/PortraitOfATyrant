@@ -9,6 +9,7 @@ public class SetConditionDialogueNode : DialogueNode {
 	public override void Init ()
 	{
 		base.Init ();
+//		GameMan.main.controller.ChangeTheMusic();
 		GameMan.main.conditionals.SetValue(condition, valueToSet);
 	}
 

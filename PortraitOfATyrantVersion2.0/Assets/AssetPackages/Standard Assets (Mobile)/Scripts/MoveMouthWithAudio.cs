@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MoveMouthWithAudio : MonoBehaviour {
 	SpectrumAnalysis spectrumAnalysis;
-	public Transform mouthToMove;
+	Transform mouthToMove;
 	public string currentName;
 	AudioSource audioSourceDialogue;
 	public float voiceAmplitude;

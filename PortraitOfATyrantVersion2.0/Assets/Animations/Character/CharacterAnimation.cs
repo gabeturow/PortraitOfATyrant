@@ -118,10 +118,13 @@ public class CharacterAnimation : MonoBehaviour {
 		Side.transform.localScale = new Vector3(0, 0, 0);
 		currentAnimator.SetBool("ClimbUp", true);
 		yield return new WaitForSeconds(3);
-		facing=Face.Right;
-		action = PlayingAnim.Walk;
 		currentAnimator.SetBool("ClimbUp", false);
 		currentAnimator.SetBool("Idle", true);
+		facing=Face.Right;
+		action = PlayingAnim.Idle;
+
+	
+
 	//Front.transform.localScale = new Vector3(0, 0, 0);
 	
 	Side.transform.localScale = new Vector3(1, 1, 1);
@@ -341,7 +344,7 @@ public class CharacterAnimation : MonoBehaviour {
 		case PlayingAnim.TurnAway:
 			if(facing == Face.Left || facing == Face.Right ){
 
-				Back.transform.localScale = new Vector3(1, 1, 1);
+				//Back.transform.localScale = new Vector3(1, 1, 1);
 				currentAnimator.SetBool("Talking", false);
 				currentAnimator.SetBool("Walking", false);
 				currentAnimator.SetBool("Laughing", false);

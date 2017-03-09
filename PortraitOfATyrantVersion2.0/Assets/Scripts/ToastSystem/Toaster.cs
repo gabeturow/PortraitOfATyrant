@@ -7,7 +7,7 @@ public class Toaster : MonoBehaviour {
 	public static Toaster main;
 
 	const float SLIDE_DELTA = 210f;
-	const float SHOW_DURATION = 20f;
+	const float SHOW_DURATION = 15f;
 
 	Image img;
 	Text text;

@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Text;
-using UnityEditor;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [System.Serializable]
 public struct DialogueLine{

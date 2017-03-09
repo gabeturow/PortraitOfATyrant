@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class GameMan : MonoBehaviour {
 	public static GameMan main;
 	public CharacterBrain character;
+	public ConditionalController controller;
 
 	ConditionalMan _conditionals;
 	public ConditionalMan conditionals{

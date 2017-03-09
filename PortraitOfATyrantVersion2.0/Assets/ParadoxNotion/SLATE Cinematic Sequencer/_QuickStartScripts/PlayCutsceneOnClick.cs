@@ -7,17 +7,21 @@ namespace Slate{
 	[AddComponentMenu("SLATE/Play Cutscene On Click")]
 	public class PlayCutsceneOnClick : MonoBehaviour {
 
+		public bool stopCutscene=false;
 		public Cutscene cutscene;
 		public UnityEvent onFinish;
 
-		void OnMouseDown(){
+		public void OnMouseDown(){
 
 			if (cutscene == null){
 				Debug.LogError("Cutscene is not provided", gameObject);
 				return;
 			}
-
+			if(!stopCutscene){
 			cutscene.Play( ()=>{onFinish.Invoke();} );
+			}else{
+				cutscene.Stop();
+			}
 		}
 
 		void Reset(){
